@@ -13,3 +13,11 @@ dependencies:
   - ipykernel=6.4.1
   - pip:
     - pytest==7.0.1
+    - sphinx==4.4.0
+    - myst-parser==0.17.0
+    - simple-http-server==0.16.2
+    - nbsphinx==0.8.8
+    - sphinxcontrib-bibtex==2.4.1
+    - sphinx-book-theme==0.3.0
+    - pandoc==2.1
+    - numpydoc==1.1.0
