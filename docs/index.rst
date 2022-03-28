@@ -17,6 +17,7 @@ ALIS: Algorithmic Library for Scalability
    :caption: Contents
    
    finding-similar-items/index
+   stream-mining/index
    bibliography
 
 

@@ -37,6 +37,20 @@ extensions = [
     'myst_nb', # For notebook integration
 ]
 
+# Myst parser extensions
+myst_enable_extensions = [
+    "amsmath",
+    "colon_fence",
+    "deflist",
+    "dollarmath",
+    "html_admonition",
+    "html_image",
+    "replacements",
+    "smartquotes",
+    "substitution",
+    "tasklist",
+]
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
