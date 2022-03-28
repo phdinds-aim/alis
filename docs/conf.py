@@ -56,7 +56,7 @@ bibtex_bibfiles = ['references.bib']
 
 # Don't execute notebooks upon building
 nbsphinx_execute = 'never'
-
+jupyter_execute_notebooks = "off"
 
 # -- Options for HTML output -------------------------------------------------
 
