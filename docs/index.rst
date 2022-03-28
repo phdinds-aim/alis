@@ -8,11 +8,16 @@ ALIS: Algorithmic Library for Scalability
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents
-   
+
    introduction
    installation
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents
+   
    finding-similar-items/index
+   bibliography
 
 
 
