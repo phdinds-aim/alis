@@ -92,7 +92,7 @@ def word_shingles(text, k, stop_words=None):
     Returns
     -------
     shingles : iterable of str
-        
+        A list containing the extracted word shingles in a document.
     """
     # Define stop words if none is given
     if stop_words is None:
@@ -128,8 +128,9 @@ def hashed_word_shingles(text, k, n, stop_words=None):
 
     Returns
     -------
-    shingles : iterable of str
-        
+    shingles : iterable of int
+        A list containing the extracted word shingles in hashed
+        representation.
     """
     # Define stop words if none is given
     if stop_words is None:
