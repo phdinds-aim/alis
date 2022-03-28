@@ -2,6 +2,9 @@
 .vscode
 .DS_Store
 
+# dask worker space
+dask-worker-space
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
