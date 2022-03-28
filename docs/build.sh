@@ -15,4 +15,4 @@ else
 fi
 
 make html
-python -m http.server 7000 -d _build/html/
+python -m http.server 8000 -d _build/html/

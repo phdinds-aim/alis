@@ -28,11 +28,13 @@ author = 'AIM PhD in DS 2024'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'myst_parser', # For markdown integration
-    'nbsphinx', # For notebook integration
-    'IPython.sphinxext.ipython_console_highlighting', # For notebook code cell syntax highlights
+    # 'myst_parser', # For markdown integration
+    # 'nbsphinx', # For notebook integration
+    # 'IPython.sphinxext.ipython_console_highlighting', # For notebook code cell syntax highlights
     'sphinxcontrib.bibtex', # For bibtex referencing
     'numpydoc', # For numpy docstring format parsing
+    'sphinx_copybutton', # Enable copy button for codes
+    'myst_nb', # For notebook integration
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -47,7 +49,6 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 source_suffix = {
     '.rst': 'restructuredtext',
     '.txt': 'markdown',
-    '.md': 'markdown',
 }
 
 # Bibtex files
@@ -70,13 +71,17 @@ html_theme_options = {
 # Mathjax setting
 myst_update_mathjax = False
 mathjax3_config = {
-    'tex': {'tags': 'ams', 'useLabelIds': True},
+    'TeX': {'equationNumbers': {'autoNumber': 'AMS', 'useLabelIds': True}},
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+html_css_files = ['custom-style.css']
+
+# Numbered reference of figures
+numfig = True
 
 # Additional extensions
 extensions.append('sphinx.ext.todo')

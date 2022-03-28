@@ -5,7 +5,7 @@ dask[complete]==2021.10.0
 matplotlib==3.5.1
 pytest==7.0.1
 sphinx==4.4.0
-myst-parser==0.17.0
+myst-parser==0.15.2
 simple-http-server==0.16.2
 nbsphinx==0.8.8
 sphinxcontrib-bibtex==2.4.1
@@ -13,3 +13,5 @@ sphinx-book-theme==0.3.0
 pandoc==2.1
 numpydoc==1.1.0
 notebook==6.4.10
+sphinx-copybutton==0.5.0
+myst-nb==0.13.2
