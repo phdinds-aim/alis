@@ -23,6 +23,7 @@ def idealized_page_rank(M, tol=10**-6, max_iter=100):
         goes below this value
     max_iter : integer
         Maximum number of iterations
+
     Returns
     -------
     v : numpy array
@@ -50,6 +51,7 @@ def transition_matrix(G):
     ----------
     G : NetworkX graph
         Graph to extract the transition matrix
+
     Returns
     -------
     M : numpy array
@@ -70,6 +72,7 @@ def taxed_page_rank(M, beta=0.8, tol=10**-6, max_iter=100):
     """Compute the Taxed PageRank (without Taxation) of a given Transition Matrix    
        Note that this not make use of `e` -- the vector of ones 
        since numpy's broadcasting takes care of properly computing a vector-constant addition
+
     Parameters
     ----------
     M : numpy array
@@ -79,6 +82,7 @@ def taxed_page_rank(M, beta=0.8, tol=10**-6, max_iter=100):
         goes below this value
     max_iter : integer
         Maximum number of iterations
+
     Returns
     -------
     v : numpy array
@@ -114,6 +118,7 @@ def topic_sensitive_page_rank(M, S, beta=0.8, tol=10**-6, max_iter=100):
         goes below this value
     max_iter : integer
         Maximum number of iterations
+
     Returns
     -------
     v : numpy array
@@ -154,6 +159,7 @@ def spam_mass(M, S, beta=0.8, tol=10**-6, max_iter=100):
         goes below this value
     max_iter : integer
         Maximum number of iterations
+
     Returns
     -------
     p : numpy array
@@ -178,6 +184,7 @@ def hits(L, tol=10**-6, max_iter=100):
         goes below this value
     max_iter : integer
         Maximum number of iterations
+
     Returns
     -------
     h, a : tuple of numpy array

@@ -97,6 +97,12 @@ html_css_files = ['custom-style.css']
 # Numbered reference of figures
 numfig = True
 
+# Autosummary generation
+numpydoc_show_class_members = False
+
+# Generate autosummary pages
+autosummary_generate = True
+
 # Additional extensions
 extensions.append('sphinx.ext.todo')
 extensions.append('sphinx.ext.autodoc')

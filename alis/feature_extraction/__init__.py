@@ -1,6 +1,6 @@
 """
-Feature Extraction Module
-=========================
+Feature Extraction
+==================
 
 This module contains functions that will be useful in extracting
 features from a given text to be represented as shingles or hashed

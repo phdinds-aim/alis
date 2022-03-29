@@ -1,6 +1,6 @@
 """
-Shingles Module
-===============
+Shingles
+========
 
 This module contains functions for extracting different types of
 shingles given a text.
