@@ -1,8 +1,5 @@
 """
-Jaccard similarity module
-=========================
-
-This module contains the definition of jaccard similarity between two
+Module definition of jaccard similarity between two
 sets given the characteristic matrix representation.
 """
 

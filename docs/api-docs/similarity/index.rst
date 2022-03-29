@@ -7,3 +7,4 @@ Similarity
    :maxdepth: 1
 
    minhash_lsh
+   jaccard

@@ -1,7 +1,7 @@
-﻿alis.feature\_extraction.minhash.MinhashLSH
-===========================================
+﻿alis.feature\_extraction.MinhashLSH
+===================================
 
-.. currentmodule:: alis.feature_extraction.minhash
+.. currentmodule:: alis.feature_extraction
 
 .. autoclass:: MinhashLSH
 

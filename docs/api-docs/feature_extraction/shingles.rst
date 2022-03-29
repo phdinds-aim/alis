@@ -2,6 +2,9 @@ Shingles
 ========
 
 .. automodule:: alis.feature_extraction.shingles
+
+.. currentmodule:: alis.feature_extraction
+
 .. autosummary::
    :toctree: shingles/
 
