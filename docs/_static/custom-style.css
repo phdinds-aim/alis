@@ -5,3 +5,7 @@ div.prompt.highlight-none.notranslate {
 div.nbinput.container div.prompt, div.nboutput.container div.prompt {
     width: 0px !important;
 }
+
+#site-navigation {
+    width: 250px !important;
+}
