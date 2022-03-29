@@ -118,11 +118,10 @@ class MinhashLSH:
                 x[1], self.shingle_size,
                 self.num_shingle_bucket, self.stop_words)
             )
-        )
+        ).filter(lambda x: len(x[1]) > 0)
         db_minhash = word_shingles.map(lambda x: (
             x[0],
             get_signature(x[1], self.num_hash, self.hash_size, self.seed)
             )
         )
-
         return db_minhash
