@@ -1,10 +1,7 @@
-.. automodule:: alis.similarity
-   :members:
-   :undoc-members:
-   :show-inheritance:
+Similarity
+==========
 
-Contents
---------
+.. automodule:: alis.similarity
 
 .. toctree::
    :maxdepth: 1

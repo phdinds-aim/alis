@@ -8,7 +8,7 @@
    .. rubric:: Methods
 
    .. autosummary::
-      :toctree:
+      :toctree: MinhashLSH/
    
       ~MinhashLSH.__init__
       ~MinhashLSH.transform

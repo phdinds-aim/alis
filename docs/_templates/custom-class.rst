@@ -7,7 +7,7 @@
    .. rubric:: Methods
 
    .. autosummary::
-      :toctree:
+      :toctree: {{ name }}/
    {% for item in methods %}
       ~{{ name }}.{{ item }}
    {%- endfor %}

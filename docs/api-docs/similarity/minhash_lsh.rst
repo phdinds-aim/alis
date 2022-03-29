@@ -2,6 +2,11 @@ Minhash LSH
 ===========
 
 .. automodule:: alis.similarity.minhash_lsh
-   :members:
-   :undoc-members:
-   :show-inheritance:
+
+.. currentmodule:: alis.similarity.minhash_lsh
+
+.. autosummary::
+   :toctree: lsh/
+   :template: custom-class.rst
+
+   LSH
