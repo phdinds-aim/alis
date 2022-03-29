@@ -16,3 +16,7 @@ In this chapter, we discuss core concepts needed to effectively examine big data
    set-similarity
    shingling
    minhashing
+   introduction-to-lsh
+   theory-of-lsf
+   lsh-for-minhash
+   the-lsh-class
