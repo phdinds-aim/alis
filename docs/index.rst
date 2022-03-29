@@ -21,6 +21,13 @@ ALIS: Algorithmic Library for Scalability
    link-analysis/index
    bibliography
 
+.. toctree::
+   :caption: API Reference
+   :maxdepth: 2
+
+   api-docs/feature_extraction/index
+   api-docs/similarity/index
+   api-docs/link_analysis/index
 
 
 Indices and tables
