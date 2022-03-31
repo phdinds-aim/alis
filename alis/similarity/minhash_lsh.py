@@ -46,8 +46,9 @@ class LSH():
 
         Parameters
         ----------
-        signature : 2-D np.array 
+        signature : 2-D np.array, or dask.bag 
             document minhash signatures with dimension n (samples) by m (signature size)
+            dask.bag of tuples (set/doc index, )
         """
         self.signature = signature
         self.bands = None  # number of bands
@@ -74,17 +75,35 @@ class LSH():
         """
 
         self.bands = bands
-        # check if number of bands divide columns equally
-        signature_size = self.signature.shape[1]
-        assert signature_size % self.bands == 0, "Number of bands not a factor of signature size."
+        
+        if type(self.signature) == db.core.Bag:
+            print("Input signature a dask bag.")
+            signature_size = len(self.signature.take(1)[0][1]) # get size of signature
+            assert signature_size % self.bands == 0, "Number of bands not a factor of signature size."
+            self.r = int(signature_size / self.bands)
+            
+            for band_label, i in enumerate(range(0, signature_size, self.r)):
+                band_bag = self.signature.map(lambda x: (x[0], np.array(x[1][i:i+self.r]))).repartition(1)
+                self.band_dict[band_label] = band_bag
+            
+        elif type(self.signature) == np.ndarray:
+            # check if number of bands divide columns equally
+            print("Input signature a numpy array.")
+            signature_size = self.signature.shape[1]
+            assert signature_size % self.bands == 0, "Number of bands not a factor of signature size."
 
-        self.r = int(signature_size / self.bands)
+            self.r = int(signature_size / self.bands)
 
-        for band_label, i in enumerate(range(0, signature_size, self.r)):
-            band_bag = db.from_sequence(
-                zip(range(signature_size),
-                    self.signature[:, i:i+self.r]), npartitions=1)
-            self.band_dict[band_label] = band_bag
+            for band_label, i in enumerate(range(0, signature_size, self.r)):
+                band_bag = db.from_sequence(
+                    zip(range(signature_size),
+                        self.signature[:, i:i+self.r]), npartitions=1)
+                self.band_dict[band_label] = band_bag
+                
+        else:
+            raise "Input signature not a dask.bag.core.Bag or a numpy.ndarry"
+
+
         return self.band_dict
 
     def get_buckets(self, hash_functions=None, compute=False):
