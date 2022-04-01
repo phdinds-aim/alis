@@ -12,37 +12,22 @@ ALIS is inspired by the [Dive into Deep Learning](https://d2l.ai/index.html) int
 
 ## Installation
 
-ALIS was built using a Python version of 3.8.12. To install the package, perform the following steps:
-
-1. Clone the `alis` github repository
+To install the package, perform the following step.
 
 ```
-https://github.com/phdinds-aim/alis.git
+pip install python-alis
 ```
 
-2. Install the environment or the requirements file via conda or pip
+`ALIS` was built using a Python version of `3.8.12`. For a more robust installation, we recommend creating an environment for your project. Afterwards, you can install the required package via `pip`.
 
-Installation of required libraries via `pip`
+```pip install -r requirements.txt```
 
-```
-pip install -r requirements.txt
-```
-
-Installation of required libraries via `conda`
+Alternatively, you can create an environment using `conda` along with the required packages. You may use the following command below:
 
 ```
 conda env create -f environment.yml
 conda activate alis
 ```
-
-3. Install the `alis` package as an editable source.
-
-```
-pip install -e .
-```
-
-Done! 🎉 The `alis` package is now installed in your machine.
-
 
 ## Authors
 

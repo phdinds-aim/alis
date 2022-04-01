@@ -4,12 +4,19 @@ from os.path import dirname, realpath
 from setuptools import find_packages, setup
 
 
-def _read_requirements_file():
-    """Return packages found in the requirements.txt"""
-    file_path = "%s/requirements.txt" % dirname(realpath(__file__))
-    with open(file_path) as f:
-        return [line.strip() for line in f]
-
+MIN_REQS = [
+    'numpy>=1.21.2'
+    'scipy>=1.7.3'
+    'scikit-learn>=1.0.2'
+    'dask[complete]>=2021.10.0'
+    'matplotlib>=3.5.1'
+    'networkx>=2.6.2'
+    'ipywidgets>=7.7.0'
+    'graphframes>=0.6'
+    'kafka-python>=2.0.2'
+    'pyspark==3.1.2'
+    'seaborn>=0.11.2'
+]
 
 # Get version from __init__.py at root
 with open("alis/__init__.py") as f:
@@ -20,7 +27,7 @@ with open("alis/__init__.py") as f:
 if __name__ == "__main__":
 
     setup(
-        name='alis',
+        name='python-alis',
         version=version,
         maintainer="AIM PhDinDS 2024",
         maintainer_email="llorenzo@aim.edu",
@@ -32,5 +39,5 @@ if __name__ == "__main__":
         long_description=open("README.md").read(),
         long_description_content_type="text/markdown",
         url="https://github.com/phdinds-aim/alis",
-        install_requires=_read_requirements_file(),
+        install_requires=MIN_REQS,
     )

@@ -1,34 +1,21 @@
 Installation
 ============
 
-ALIS was built using a Python version of 3.8.12. To install the package, perform the following steps:
-
-Clone the ``alis`` github repository
+To install the package, perform the following step.
 
 .. code-block:: bash
 
-    git clone https://github.com/phdinds-aim/alis.git
+    pip install python-alis
 
-
-Install the environment or the requirements file via conda or pip
-
-via ``pip``
+``ALIS`` was built using a Python version of ``3.8.12``. For a more robust installation, we recommend creating an environment for your project. Afterwards, you can install the required package via ``pip``.
 
 .. code-block:: bash
 
     pip install -r requirements.txt
 
-via ``conda``
+Alternatively, you can create an environment using ``conda`` along with the required packages. You may use the following command below:
 
 .. code-block:: bash
 
     conda env create -f environment.yml
     conda activate alis
-
-Install the `alis` package as an editable source.
-
-.. code-block:: bash
-
-    pip install -e .
-
-Done! 🎉 The ``alis`` package is now installed in your machine.
