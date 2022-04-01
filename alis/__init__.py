@@ -6,4 +6,4 @@ ALiS is a collection of scalable algorithms useful in the field of Data
 Science.
 """
 
-__version__ = "0.0.0"
+__version__ = "0.1.0"
