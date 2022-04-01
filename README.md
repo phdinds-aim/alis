@@ -10,6 +10,8 @@ This book provides:
 
 ALIS is inspired by the [Dive into Deep Learning](https://d2l.ai/index.html) interactive book with code, math, and discussion.
 
+Find the ALIS documentation/book [here](https://phdinds-aim.github.io/alis/).
+
 ## Installation
 
 ALIS was built using a Python version of 3.8.12. To install the package, perform the following steps:
