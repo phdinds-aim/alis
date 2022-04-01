@@ -19,6 +19,7 @@ ALIS: Algorithmic Library for Scalability
    finding-similar-items/index
    stream-mining/index
    link-analysis/index
+   social-network-graphs/index
    bibliography
 
 .. toctree::
