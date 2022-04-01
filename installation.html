@@ -740,26 +740,19 @@ title="Print to PDF"
                 
   <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">#</a></h1>
-<p>ALIS was built using a Python version of 3.8.12. To install the package, perform the following steps:</p>
-<p>Clone the <code class="docutils literal notranslate"><span class="pre">alis</span></code> github repository</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/phdinds-aim/alis.git
+<p>To install the package, perform the following step.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install python-alis
 </pre></div>
 </div>
-<p>Install the environment or the requirements file via conda or pip</p>
-<p>via <code class="docutils literal notranslate"><span class="pre">pip</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">ALIS</span></code> was built using a Python version of <code class="docutils literal notranslate"><span class="pre">3.8.12</span></code>. For a more robust installation, we recommend creating an environment for your project. Afterwards, you can install the required package via <code class="docutils literal notranslate"><span class="pre">pip</span></code>.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -r requirements.txt
 </pre></div>
 </div>
-<p>via <code class="docutils literal notranslate"><span class="pre">conda</span></code></p>
+<p>Alternatively, you can create an environment using <code class="docutils literal notranslate"><span class="pre">conda</span></code> along with the required packages. You may use the following command below:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env create -f environment.yml
 conda activate alis
 </pre></div>
 </div>
-<p>Install the <cite>alis</cite> package as an editable source.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -e .
-</pre></div>
-</div>
-<p>Done! 🎉 The <code class="docutils literal notranslate"><span class="pre">alis</span></code> package is now installed in your machine.</p>
 </section>
 
 
