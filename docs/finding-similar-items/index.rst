@@ -20,3 +20,4 @@ In this chapter, we discuss core concepts needed to effectively examine big data
    theory-of-lsf
    lsh-for-minhash
    the-lsh-class
+   demo-minhash-lsh
