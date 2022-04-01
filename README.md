@@ -10,6 +10,8 @@ This book provides:
 
 ALIS is inspired by the [Dive into Deep Learning](https://d2l.ai/index.html) interactive book with code, math, and discussion.
 
+Find the ALIS documentation/book [here](https://phdinds-aim.github.io/alis/).
+
 ## Installation
 
 To install the package, perform the following step.
