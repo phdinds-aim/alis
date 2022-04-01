@@ -6,9 +6,6 @@
 ALIS: Algorithmic Library for Scalability
 =========================================
 
-Introduction
-============
-
 ALIS: Algorithmic Library for Scalability is a Python package and a good accompanying reference for Leskovec, Rajaraman, and Ullman's `Mining of Massive Datasets <http://www.mmds.org/>`_. This book currently covers topics from Chapters 3 through 5, and Chapter 10 of the reference.
 
 This book provides:
