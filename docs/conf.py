@@ -35,6 +35,7 @@ extensions = [
     'numpydoc', # For numpy docstring format parsing
     'sphinx_copybutton', # Enable copy button for codes
     'myst_nb', # For notebook integration
+    'sphinx.ext.githubpages', # For github pages deployment
 ]
 
 # Myst parser extensions
@@ -68,9 +69,12 @@ source_suffix = {
 # Bibtex files
 bibtex_bibfiles = ['references.bib']
 
-# Don't execute notebooks upon building
+# Execute notebooks upon building except for some
 nbsphinx_execute = 'never'
-jupyter_execute_notebooks = "off"
+jupyter_execute_notebooks = "auto"
+execution_excludepatterns = [
+    'link-analysis/*', 'social-network-graphs/*', 'stream-mining/*',
+    'demo-minhash-lsh.ipynb', 'the-lsh-class.ipynb', 'minhashing.ipynb']
 
 # -- Options for HTML output -------------------------------------------------
 
