@@ -59,7 +59,10 @@
     "ExecuteTime": {
      "end_time": "2022-04-01T12:36:18.576144Z",
      "start_time": "2022-04-01T12:36:18.383695Z"
-    }
+    },
+    "tags": [
+     "hide-input"
+    ]
    },
    "outputs": [],
    "source": [
@@ -161,6 +164,7 @@
   }
  ],
  "metadata": {
+  "celltoolbar": "Tags",
   "hide_input": false,
   "kernelspec": {
    "display_name": "Python 3 (ipykernel)",
