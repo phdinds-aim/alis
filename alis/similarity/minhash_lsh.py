@@ -77,7 +77,6 @@ class LSH():
         self.bands = bands
         
         if type(self.signature) == db.core.Bag:
-            print("Input signature a dask bag.")
             signature_size = len(self.signature.take(1)[0][1]) # get size of signature
             assert signature_size % self.bands == 0, "Number of bands not a factor of signature size."
             self.r = int(signature_size / self.bands)
@@ -88,7 +87,6 @@ class LSH():
             
         elif type(self.signature) == np.ndarray:
             # check if number of bands divide columns equally
-            print("Input signature a numpy array.")
             signature_size = self.signature.shape[1]
             assert signature_size % self.bands == 0, "Number of bands not a factor of signature size."
 
@@ -162,7 +160,7 @@ class LSH():
 
         return thresh
 
-    def plot_thresh(self, display_thresh=True, ax=None, **kwargs):
+    def plot_thresh(self, return_thresh=True, display_thresh=True, ax=None, **kwargs):
         """Plots the threshold plot according to number of bands.
 
         Parameters
@@ -183,12 +181,11 @@ class LSH():
         p_list = np.array([self._prob_of_s(s) for s in s_list])
 
         if ax is None:
-            fig, ax = plt.subplots(figsize=(10, 5))
+            fig, ax = plt.subplots(figsize=(8, 5))
 
         ax.plot(s_list, p_list, **kwargs)
-
+        thresh = self._get_approx_thresh()
         if display_thresh:
-            thresh = self._get_approx_thresh()
             ax.axvline(thresh, color='black', linestyle='--',
                        label=f'Similarity Threshold: {thresh:.2f}')
 
@@ -196,6 +193,18 @@ class LSH():
                      fontsize=15)
         ax.set_ylabel('Probability', fontsize=13)
         ax.set_xlabel('Jaccard Similarity of Documents', fontsize=13)
-        ax.legend()
+        
+        # Hide the right and top spines
+        ax.spines['right'].set_visible(False)
+        ax.spines['top'].set_visible(False)
+
+        # set spines lw
+        ax.spines['left'].set_linewidth(3)
+        ax.spines['bottom'].set_linewidth(3)
+        
+        ax.legend(fontsize=13)
         self.ax_ = ax
+        if return_thresh:
+            return self.ax_, thresh
         return self.ax_
+    
