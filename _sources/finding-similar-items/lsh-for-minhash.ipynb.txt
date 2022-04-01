@@ -53,12 +53,12 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 1,
+   "execution_count": 3,
    "id": "370d67b0",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2022-04-01T17:16:33.505768Z",
-     "start_time": "2022-04-01T17:16:32.343235Z"
+     "end_time": "2022-04-01T17:30:52.320694Z",
+     "start_time": "2022-04-01T17:30:52.241906Z"
     },
     "tags": [
      "hide-input"
@@ -68,7 +68,7 @@
     {
      "data": {
       "application/vnd.jupyter.widget-view+json": {
-       "model_id": "030b69ab8df444198fafe5b0251e0fbe",
+       "model_id": "87348fe25b2548e1809c5864a15afb94",
        "version_major": 2,
        "version_minor": 0
       },
@@ -176,6 +176,14 @@
     "\n",
     "widgets.VBox([size_widget,b_widget, g])"
    ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "76f5e984",
+   "metadata": {},
+   "outputs": [],
+   "source": []
   }
  ],
  "metadata": {
@@ -196,7 +204,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.9.6"
+   "version": "3.8.12"
   },
   "toc": {
    "base_numbering": 1,
