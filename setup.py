@@ -5,17 +5,18 @@ from setuptools import find_packages, setup
 
 
 MIN_REQS = [
-    'numpy>=1.21.2'
-    'scipy>=1.7.3'
-    'scikit-learn>=1.0.2'
-    'dask[complete]>=2021.10.0'
-    'matplotlib>=3.5.1'
-    'networkx>=2.6.2'
-    'ipywidgets>=7.7.0'
-    'graphframes>=0.6'
-    'kafka-python>=2.0.2'
-    'pyspark==3.1.2'
-    'seaborn>=0.11.2'
+    'numpy>=1.21.2',
+    'scipy>=1.7.3',
+    'scikit-learn>=1.0.2',
+    'dask[complete]>=2021.10.0',
+    'matplotlib>=3.5.1',
+    'networkx>=2.6.2',
+    'ipywidgets>=7.7.0',
+    'graphframes>=0.6',
+    'kafka-python>=2.0.2',
+    'pyspark==3.1.2',
+    'seaborn>=0.11.2',
+    'plotly>=5.6.0'
 ]
 
 # Get version from __init__.py at root

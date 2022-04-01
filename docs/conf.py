@@ -71,7 +71,7 @@ bibtex_bibfiles = ['references.bib']
 
 # Execute notebooks upon building except for some
 nbsphinx_execute = 'never'
-jupyter_execute_notebooks = "auto"
+jupyter_execute_notebooks = "force"
 execution_excludepatterns = [
     'link-analysis/*', 'social-network-graphs/*', 'stream-mining/*',
     'demo-minhash-lsh.ipynb', 'the-lsh-class.ipynb', 'minhashing.ipynb']
