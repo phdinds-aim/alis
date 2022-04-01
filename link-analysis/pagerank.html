@@ -1,0 +1,1317 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>PageRank &#8212; ALIS: Algorithmic Library for Scalability  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=4fea3ae4a0a4ba949df0a89bbae557cc2ce861ae" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom-style.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"TeX": {"equationNumbers": {"autoNumber": "AMS", "useLabelIds": true}}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PageRank for Large Data" href="pagerank-for-large-data.html" />
+    <link rel="prev" title="Link Analysis" href="index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">ALIS: Algorithmic Library for Scalability  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../installation.html">
+   Installation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../finding-similar-items/index.html">
+   Finding Similar Items
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/set-similarity.html">
+     Set Similarity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/shingling.html">
+     Shingling of Documents
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/minhashing.html">
+     Minhashing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/introduction-to-lsh.html">
+     Locality Sensitive Hashing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/theory-of-lsf.html">
+     Theory of LSF
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/lsh-for-minhash.html">
+     LSH Banding Technique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/the-lsh-class.html">
+     Many-to-Many Document Similarity Task
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/demo-minhash-lsh.html">
+     LSH and Document Similarity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stream-mining/index.html">
+   Stream Mining
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/stream-data-model.html">
+     Stream Data Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/data-stream.html">
+     Sampling Data in a Stream
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/filtering-stream.html">
+     Filtering Streams
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/counting-distinct.html">
+     Counting Distinct Elements in a Stream
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/moments.html">
+     Moments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/counting-ones.html">
+     Counting Ones in a Window
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/common-recent.html">
+     Most Common Recent Elements
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   Link Analysis
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     PageRank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pagerank-for-large-data.html">
+     PageRank for Large Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pagerank-mapreduce.html">
+     PageRank using MapReduce
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="topic-sensitive-pagerank.html">
+     Topic-Sensitive PageRank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hubs-and-authorities.html">
+     Hubs and Authorities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../social-network-graphs/index.html">
+   Social Network Graphs
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/social-network-preliminaries.html">
+     What is a Social Network?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/network-measures.html">
+     Network Measures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/community-detection.html">
+     Community Detection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/social-network-analysis-using-graphframes.html">
+     Social Network Analysis using GraphFrames
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  API Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/feature_extraction/index.html">
+   Feature Extraction
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/feature_extraction/shingles.html">
+     Shingles
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/feature_extraction/minhash.html">
+     Minhashing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/similarity/index.html">
+   Similarity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/similarity/minhash_lsh.html">
+     Minhash LSH
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/similarity/jaccard.html">
+     Jaccard Similarity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api-docs/stream_mining/index.html">
+   Stream Mining
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api-docs/link_analysis/index.html">
+   Link Analysis
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/network_tools/index.html">
+   Network Tools
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/clustering.html">
+     Clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/metrics.html">
+     Metrics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/plots.html">
+     Plots
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/link-analysis/pagerank.ipynb.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#early-search-engines">
+   Early Search Engines
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#term-spam">
+   Term Spam
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introducing-page-rank">
+   Introducing Page Rank
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graph-notations">
+   Graph Notations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#defining-and-displaying-graphs-with-networkx">
+   Defining and Displaying Graphs with NetworkX
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adjacency-matrix">
+   Adjacency Matrix
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transition-matrix">
+   Transition Matrix
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pagerank-computation">
+   PageRank Computation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#iterative-method-for-computing-pagerank">
+   Iterative Method for Computing PageRank
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#power-iteration-method-for-computing-the-idealized-pagerank">
+   Power Iteration Method for Computing the Idealized PageRank
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#issues-with-pagerank">
+   Issues with PageRank
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deadends">
+     Deadends
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spider-traps">
+     Spider Traps
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pagerank-with-taxation">
+   PageRank with Taxation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-pagerank-in-search-engine">
+   Using PageRank in Search Engine
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>PageRank</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#early-search-engines">
+   Early Search Engines
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#term-spam">
+   Term Spam
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introducing-page-rank">
+   Introducing Page Rank
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graph-notations">
+   Graph Notations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#defining-and-displaying-graphs-with-networkx">
+   Defining and Displaying Graphs with NetworkX
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adjacency-matrix">
+   Adjacency Matrix
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transition-matrix">
+   Transition Matrix
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pagerank-computation">
+   PageRank Computation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#iterative-method-for-computing-pagerank">
+   Iterative Method for Computing PageRank
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#power-iteration-method-for-computing-the-idealized-pagerank">
+   Power Iteration Method for Computing the Idealized PageRank
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#issues-with-pagerank">
+   Issues with PageRank
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deadends">
+     Deadends
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spider-traps">
+     Spider Traps
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pagerank-with-taxation">
+   PageRank with Taxation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-pagerank-in-search-engine">
+   Using PageRank in Search Engine
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="pagerank">
+<h1>PageRank<a class="headerlink" href="#pagerank" title="Permalink to this headline">#</a></h1>
+<p>Before we discuss the PageRank algorithm, let’s take a quick look at its history and what motivated its creation.</p>
+<section id="early-search-engines">
+<h2>Early Search Engines<a class="headerlink" href="#early-search-engines" title="Permalink to this headline">#</a></h2>
+<p>Early approaches to search engines involved crawling web pages and then listing terms that appeared and storing them in an <em>inverted index</em>, a data structure that allows locating all places <em>pointed to</em> by a term.</p>
+<p>When a <em>search query</em> is given:</p>
+<ul class="simple">
+<li><p>terms are extracted from the search query</p></li>
+<li><p>pages are pointed to by the terms are retrieved</p></li>
+<li><p>pages are ranked according to</p>
+<ul>
+<li><p>how the terms were used in the page (e.g. terms appearing in headers have more importance)</p></li>
+<li><p>how frequent those terms appeared in the page</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="term-spam">
+<h2>Term Spam<a class="headerlink" href="#term-spam" title="Permalink to this headline">#</a></h2>
+<p>Some unethical people saw the opportunity of fooling search engines to direct users to their site (a sort of free advertisement).  For example, if they want to direct users searching for ‘movie’ to their site, they would do the following:</p>
+<ul class="simple">
+<li><p>Add a <em>lot</em> of occurances of the term ‘movie’ to their site (with font color similar to page’s background to hide the text)</p></li>
+<li><p>Do a search for <em>movie</em> and copy contents of the highest-ranked page (again, using the “invisible text” approach above).
+This technique for fooling a search engine into believing that a page is something that it is not is called <em>term spam</em>.</p></li>
+</ul>
+</section>
+<section id="introducing-page-rank">
+<h2>Introducing Page Rank<a class="headerlink" href="#introducing-page-rank" title="Permalink to this headline">#</a></h2>
+<p>To combat term spam, Google introduced two innovations:</p>
+<ul class="simple">
+<li><p>They introduced PageRank to assess the importance of pages</p>
+<ul>
+<li><p>A simulation of Web surfers, starting at a random page, randomly following outlinks in each page they visit. Process iterates many times.</p></li>
+<li><p>The pages visited more often by the surfers are considered more important</p></li>
+</ul>
+</li>
+<li><p>Pages were judged not only by the terms that appeared in them, but by the <em>terms used in the link</em> (the anchor text), and the terms near the links to that page.</p></li>
+</ul>
+</section>
+<section id="graph-notations">
+<h2>Graph Notations<a class="headerlink" href="#graph-notations" title="Permalink to this headline">#</a></h2>
+<p>To illustrate how PageRank and other Link Analysis algorithms work, it is useful to think of the Web as a directed graph with the following characteristics:</p>
+<ul class="simple">
+<li><p><strong>nodes</strong> represent pages</p></li>
+<li><p><strong>arcs</strong> represent links from one page to another</p></li>
+</ul>
+</section>
+<section id="defining-and-displaying-graphs-with-networkx">
+<h2>Defining and Displaying Graphs with NetworkX<a class="headerlink" href="#defining-and-displaying-graphs-with-networkx" title="Permalink to this headline">#</a></h2>
+<p>A useful package for defining and displaying graphs in python is NetworkX. Below is an illustration of how we create a directed graph by defining the graph’s nodes and edges. We then show the graph with a call to the <code class="docutils literal notranslate"><span class="pre">draw</span></code> command.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">G1</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+<span class="n">G1</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;C&quot;</span><span class="p">,</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="s2">&quot;E&quot;</span><span class="p">])</span>
+<span class="n">G1</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;C&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;D&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;E&quot;</span><span class="p">),</span> 
+    <span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;A&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;D&quot;</span><span class="p">),</span> 
+    <span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span><span class="s2">&quot;A&quot;</span><span class="p">),</span>    
+    <span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="s2">&quot;C&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;E&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">),</span>
+<span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>  
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Graph 1. A Graph as a hypothetical representation of the web&quot;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G1</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/pagerank_12_0.png" src="../_images/pagerank_12_0.png" />
+</div>
+</div>
+</section>
+<section id="adjacency-matrix">
+<h2>Adjacency Matrix<a class="headerlink" href="#adjacency-matrix" title="Permalink to this headline">#</a></h2>
+<p>The <strong>Adjacency Matrix</strong> is a representation showing which vertices are adjacent, i.e., connected by edges or links. Formally, if <span class="math notranslate nohighlight">\(A\)</span> is the adjacency matrix of a graph <span class="math notranslate nohighlight">\(G\)</span>, and <span class="math notranslate nohighlight">\(a_{ij}\)</span> are the elements of <span class="math notranslate nohighlight">\(A\)</span>,
+<span class="math notranslate nohighlight">\(a_{ij}=1\)</span> if there is a link from node <span class="math notranslate nohighlight">\(i\)</span> to node <span class="math notranslate nohighlight">\(j\)</span>, otherwise, <span class="math notranslate nohighlight">\(a_{ij}=0\)</span>.</p>
+<p>In the discussion later on Hubs and Authorities, this matrix will also be known as the <strong>Link Matrix</strong>. It represents the existence of outgoing links from one page to another.</p>
+<p>In NetworkX, the adjacency matrix can be computed using the <code class="docutils literal notranslate"><span class="pre">adjacency_matrix</span></code> function. This produces a sparse matrix. We can convert this to a dense matrix by calling the <code class="docutils literal notranslate"><span class="pre">toarray</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">G1</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 1, 1, 1, 1],
+       [1, 0, 0, 1, 0],
+       [1, 0, 0, 0, 0],
+       [0, 1, 1, 0, 0],
+       [0, 1, 0, 0, 0]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="transition-matrix">
+<h2>Transition Matrix<a class="headerlink" href="#transition-matrix" title="Permalink to this headline">#</a></h2>
+<p>In the computation of PageRank, an important data structure is the <strong>Transition Matrix</strong>.</p>
+<p>Recall the idea of a surfer randomly browsing through the Web. Given graph <span class="math notranslate nohighlight">\(G1\)</span>, our hypothetical representation of the Web in Figure 1, if the surfer is at page A, the following are the probabilities of the next page he will visit:</p>
+<ul class="simple">
+<li><p>page A: 0</p></li>
+<li><p>page B: 1/4</p></li>
+<li><p>page C: 1/4</p></li>
+<li><p>page D: 1/4</p></li>
+<li><p>page E: 1/4</p></li>
+</ul>
+<p>We can do the same for all other nodes and define a <em>Transition Matrix</em> to represent the the probabilities of where this surfer would go next, for any starting location in the Web.</p>
+<p>To generate the Transition Matrix from a graph, we will need the <em>transpose</em> of its Adjacency Matrix as well as a vector of its out degrees (the number of links coming out from a node or page) . We have already computed for <span class="math notranslate nohighlight">\(G1\)</span>’s adjacency matrix and stored it in <span class="math notranslate nohighlight">\(A\)</span>; to get the outlinks of the nodes, we can use the graph’s <code class="docutils literal notranslate"><span class="pre">out_degree</span></code> method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G1</span><span class="o">.</span><span class="n">out_degree</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OutDegreeView({&#39;A&#39;: 4, &#39;B&#39;: 2, &#39;C&#39;: 1, &#39;D&#39;: 2, &#39;E&#39;: 1})
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then convert this into an numpy array, getting only the values of the outdegrees:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">G1</span><span class="o">.</span><span class="n">out_degree</span><span class="p">)])</span>
+<span class="n">d</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([4, 2, 1, 2, 1])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can compute the Transition matrix:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
+<span class="n">M</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.  , 0.5 , 1.  , 0.  , 0.  ],
+       [0.25, 0.  , 0.  , 0.5 , 1.  ],
+       [0.25, 0.  , 0.  , 0.5 , 0.  ],
+       [0.25, 0.5 , 0.  , 0.  , 0.  ],
+       [0.25, 0.  , 0.  , 0.  , 0.  ]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">transition_matrix_beta</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the Transition Matrix given a NetworkX graph</span>
+<span class="sd">    This version cannot handle dead-ends, i.e., nodes without outlinks,</span>
+<span class="sd">    hence it&#39;s called beta</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    G : NetworkX graph</span>
+<span class="sd">        Graph to extract the transition matrix</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    M : numpy array</span>
+<span class="sd">        Numpy array of the transition matrix of G</span>
+<span class="sd">    &quot;&quot;&quot;</span>        
+    <span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">G</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">out_degree</span><span class="p">)])</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">M</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that version of the function above cannot handle dead-ends (nodes without outlinks, to be discussed in a later section).</p>
+<p>The transition matrix could now be computed from a NetworkX graph as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transition_matrix_beta</span><span class="p">(</span><span class="n">G1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.  , 0.5 , 1.  , 0.  , 0.  ],
+       [0.25, 0.  , 0.  , 0.5 , 1.  ],
+       [0.25, 0.  , 0.  , 0.5 , 0.  ],
+       [0.25, 0.5 , 0.  , 0.  , 0.  ],
+       [0.25, 0.  , 0.  , 0.  , 0.  ]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>This matrix <span class="math notranslate nohighlight">\(M\)</span> represents the transition matrix of <span class="math notranslate nohighlight">\(G1\)</span>, with the indices for nodes A, B, C, D,E being 0,1,2,3,4 respectively.</p>
+</section>
+<section id="pagerank-computation">
+<h2>PageRank Computation<a class="headerlink" href="#pagerank-computation" title="Permalink to this headline">#</a></h2>
+<p>PageRank is a function that assigns a real number to a page in the Web, reflecting the page’s importance. There are variations in the algorithms that compute the PageRank. We will tackle a few of them in the succeeding sections.</p>
+<p>Formally, if <span class="math notranslate nohighlight">\(m_{ij}\)</span> are the elements of <span class="math notranslate nohighlight">\(M\)</span>, and node <span class="math notranslate nohighlight">\(j\)</span> has <span class="math notranslate nohighlight">\(d\)</span> outgoing links, we set <span class="math notranslate nohighlight">\(m_{ij}\)</span> to <span class="math notranslate nohighlight">\(1/d\)</span> if there is a link from page <span class="math notranslate nohighlight">\(j\)</span> to page <span class="math notranslate nohighlight">\(i\)</span>, otherwise, we set it to 0. From this, we get that the <span class="math notranslate nohighlight">\(j\)</span>th column represents the transition probability distribution for a surfer who is at node <span class="math notranslate nohighlight">\(j\)</span>. This matrix is the <strong>idealized PageRank</strong>. Note that the sum of each column is exactly 1. Such a matrix where each column sums up to one is said to be <em>stochastic</em>.</p>
+<p>To compute the actual PageRank, we have to iterate the surfing process.</p>
+<ul class="simple">
+<li><p>Surfer starts at any location in the web with equal probability. Let’s represent this as <span class="math notranslate nohighlight">\(\textbf{v}^{(0)}\)</span>.</p></li>
+<li><p>After one step, the distribution of the surfer will be <span class="math notranslate nohighlight">\(\textbf{v}^{(1)}\)</span> = <span class="math notranslate nohighlight">\(M \textbf{v}^{(0)}\)</span></p></li>
+<li><p>After two steps, the distribution of the surfer will be <span class="math notranslate nohighlight">\(\textbf{v}^{(2)}\)</span> = <span class="math notranslate nohighlight">\(M\textbf{v}^{(1)}\)</span> =  <span class="math notranslate nohighlight">\(M(M \textbf{v}^{(0)})\)</span> = <span class="math notranslate nohighlight">\(M^{2}  \textbf{v}^{(0)}  \)</span></p></li>
+</ul>
+<p><a class="reference internal" href="#pagerank-update"><span class="std std-numref">Fig. 8</span></a> below illustrates how <span class="math notranslate nohighlight">\(\textbf{v}\)</span> is updated for one iteration, showing that the updated value of <span class="math notranslate nohighlight">\(\textbf{v}\)</span> gives the new probability distribution  for all the nodes.</p>
+<figure class="align-default" id="pagerank-update">
+<a class="reference internal image-reference" href="../_images/PageRank-Update-Mv.PNG"><img alt="../_images/PageRank-Update-Mv.PNG" src="../_images/PageRank-Update-Mv.PNG" style="width: 450px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">One iteration/update of PageRank Algorithm.</span><a class="headerlink" href="#pagerank-update" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>We can thus formulate an update rule <span class="math notranslate nohighlight">\(\textbf{v}^{(i+1)} = M\textbf{v}^{(i)}\)</span>, which is an example of a <em>Markov process</em>.  It is known that such a process will stabilize at <span class="math notranslate nohighlight">\(\textbf{v} = M\textbf{v}\)</span> if the following conditions are met:</p>
+<ol class="simple">
+<li><p>The graph is strongly connected</p></li>
+<li><p>There are no dead ends</p></li>
+</ol>
+<p>From the above, we observe that stability can be reached if <span class="math notranslate nohighlight">\(M\textbf{v}\)</span> no longer updates <span class="math notranslate nohighlight">\(\textbf{v}\)</span>.</p>
+<p>This <span class="math notranslate nohighlight">\(\textbf{v}\)</span> is, in fact, the an <em>eigenvector</em> of <span class="math notranslate nohighlight">\(M\)</span>. Recall:
+An <em>eigenvector</em> of a matrix <span class="math notranslate nohighlight">\(M\)</span> is a vector <span class="math notranslate nohighlight">\(\textbf{v}\)</span> that satisfies
+$<span class="math notranslate nohighlight">\( \textbf{v}= \lambda M \textbf{v} \)</span><span class="math notranslate nohighlight">\(
+where \)</span>\lambda$ is some constant known as the <em>eigenvalue</em>.</p>
+<p>Since <span class="math notranslate nohighlight">\(M\)</span> is stochastic, we can further say that <span class="math notranslate nohighlight">\(\textbf{v}\)</span> is the principal eigenvector of <span class="math notranslate nohighlight">\(M\)</span> and <span class="math notranslate nohighlight">\(\lambda =1\)</span>.</p>
+<p>From this, we can say that the principal eigenvector of <span class="math notranslate nohighlight">\(M\)</span>  gives us the probability distribution of where (at which page) a random surfer would most likely be after a long time. Thus,the principal eigenvector actually gives us the PageRank of each page.</p>
+</section>
+<section id="iterative-method-for-computing-pagerank">
+<h2>Iterative Method for Computing PageRank<a class="headerlink" href="#iterative-method-for-computing-pagerank" title="Permalink to this headline">#</a></h2>
+<p>Here, we summarize the process of computing the PageRank known as the <em>Power Iteration Method</em>. Given <span class="math notranslate nohighlight">\(n\)</span> pages/nodes:</p>
+<ol>
+<li><p>Create the characteristic matrix <span class="math notranslate nohighlight">\(M\)</span>  (size <span class="math notranslate nohighlight">\(nxn\)</span>), whose elements <span class="math notranslate nohighlight">\(m_{ij}\)</span> are defined as follows:</p>
+<p><span class="math notranslate nohighlight">\(
+     m_{ij}=\left\{
+     \begin{array}{&#64;{}ll&#64;{}}
+     1/d, &amp; \text{if there is a link from page } j \text{ to } i \text{ and page } j \text{ has } d \text{ outlinks}\\
+     0, &amp; \text{otherwise}
+     \end{array}\right.
+ \)</span></p>
+</li>
+<li><p>Initialize <span class="math notranslate nohighlight">\(\textbf{v}^{(0)}\)</span></p>
+<p><span class="math notranslate nohighlight">\(
+     \textbf{v}^{(0)}_{i} = 1/n \text{, for all } i 
+ \)</span></p>
+</li>
+<li><p>Iteratively update <span class="math notranslate nohighlight">\(\textbf{v}\)</span></p>
+<p><span class="math notranslate nohighlight">\(
+ \textbf{v}^{(t+1)} = M\textbf{v}^{(t)}
+ \)</span></p>
+</li>
+<li><p>Stop when <span class="math notranslate nohighlight">\(\lvert \textbf{v}^{(t+1)}-\textbf{v}^{(t)} \rvert &lt; \epsilon \)</span>.</p></li>
+</ol>
+</section>
+<section id="power-iteration-method-for-computing-the-idealized-pagerank">
+<h2>Power Iteration Method for Computing the Idealized PageRank<a class="headerlink" href="#power-iteration-method-for-computing-the-idealized-pagerank" title="Permalink to this headline">#</a></h2>
+<p>To get a concrete idea how the algorithm works, below is a python implementation of the Idealized PageRank using the Power Iteration Method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">idealized_page_rank</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mi">10</span><span class="o">**-</span><span class="mi">6</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the Idealized PageRank (without Taxation) of a given Transition Matrix    </span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    M : numpy array</span>
+<span class="sd">        Transition Matrix: Array of shape (n, n), where n is the number of nodes in the network</span>
+<span class="sd">    tol : float</span>
+<span class="sd">        Tolerance: Iteration stops if the distance between previous and updated PageRank vectors </span>
+<span class="sd">        goes below this value</span>
+<span class="sd">    max_iter : integer</span>
+<span class="sd">        Maximum number of iterations</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    v : numpy array</span>
+<span class="sd">        Vector of size n containing the ordinary PageRank values </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">n</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">tol</span> <span class="c1"># initialize vector difference to a large number</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">delta</span> <span class="o">&gt;</span> <span class="n">tol</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">prev_v</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">v</span><span class="o">-</span><span class="n">prev_v</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">max_iter</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">v</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Applying function to the <span class="math notranslate nohighlight">\(G1\)</span> in Figure 1, we get the following results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">transition_matrix_beta</span><span class="p">(</span><span class="n">G1</span><span class="p">)</span>
+<span class="n">idealized_page_rank</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.30000001, 0.25000013, 0.17500001, 0.1999999 , 0.07499995])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="issues-with-pagerank">
+<h2>Issues with PageRank<a class="headerlink" href="#issues-with-pagerank" title="Permalink to this headline">#</a></h2>
+<p>In this subsection, we consider two issues that affect the computation of PageRank.</p>
+<section id="deadends">
+<h3>Deadends<a class="headerlink" href="#deadends" title="Permalink to this headline">#</a></h3>
+<p>First, let’s take a look at <em>deadends</em>, pages with no outgoing links. The graph <span class="math notranslate nohighlight">\(G2\)</span> below is the same as <span class="math notranslate nohighlight">\(G1\)</span> except that the outgoing link from node E was removed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G2</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+<span class="n">G2</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;C&quot;</span><span class="p">,</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="s2">&quot;E&quot;</span><span class="p">])</span>
+<span class="n">G2</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;C&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;D&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;E&quot;</span><span class="p">),</span> 
+    <span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;A&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;D&quot;</span><span class="p">),</span> 
+    <span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span><span class="s2">&quot;A&quot;</span><span class="p">),</span>    
+    <span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="s2">&quot;C&quot;</span><span class="p">),</span>
+    <span class="c1"># no outgoing link from node E</span>
+<span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>  
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Graph 2. A network with a deadend (at node E).&quot;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G2</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/pagerank_49_0.png" src="../_images/pagerank_49_0.png" />
+</div>
+</div>
+<p>Consider the graph bove.  Here we see that node E does not have any outgoing links, thus E is a deadend. The problem with deadends is that it is like a sink for infornation because while it ‘absorbs’ PageRank scores during the iterations: it does not pass them on to other nodes. As a result, some or all the components would eventually go to zero.</p>
+<p>To see this effect, let us edit our <code class="docutils literal notranslate"><span class="pre">transition_matrix</span></code> function to handle nodes with zero degrees. The main problem is that a division by zero error could occur when we divide <span class="math notranslate nohighlight">\(A.T\)</span> by <span class="math notranslate nohighlight">\(d\)</span> if  <span class="math notranslate nohighlight">\(d\)</span> has zero values. To address this, we just set the zero values of <span class="math notranslate nohighlight">\(d\)</span> to 1. This will not affect the resulting matrix since the corresponding column in <span class="math notranslate nohighlight">\(A.T\)</span> will all be zeros (recall that there are no outlinks for this node.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">transition_matrix</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the Transition Matrix given a NetworkX graph</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    G : NetworkX graph</span>
+<span class="sd">        Graph to extract the transition matrix</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    M : numpy array</span>
+<span class="sd">        Numpy array of the transition matrix of G</span>
+<span class="sd">    &quot;&quot;&quot;</span>        
+    <span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">G</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">out_degree</span><span class="p">)])</span>
+    
+    <span class="c1"># get indices with zero and replace them with 1 to avoid division by zero</span>
+    <span class="c1"># this won&#39;t affect the result since the corresponding column will have all zeros</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">d</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+    
+    <span class="n">M</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>    
+    <span class="k">return</span> <span class="n">M</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s now compute the transition matrix for Graph 2 and see what happens when we apply the Power Iteration Method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M2</span> <span class="o">=</span> <span class="n">transition_matrix</span><span class="p">(</span><span class="n">G2</span><span class="p">)</span>
+<span class="n">M2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.  , 0.5 , 1.  , 0.  , 0.  ],
+       [0.25, 0.  , 0.  , 0.5 , 0.  ],
+       [0.25, 0.  , 0.  , 0.5 , 0.  ],
+       [0.25, 0.5 , 0.  , 0.  , 0.  ],
+       [0.25, 0.  , 0.  , 0.  , 0.  ]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>First, we observe that the characteristic Matrix is no longer <em>stochastic</em> - the sum at column E is 0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M2</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1., 1., 1., 1., 0.])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">idealized_page_rank</span><span class="p">(</span><span class="n">M2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">rint</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0., 0., 0., 0., 0.])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We observe that the final values of all elements of <span class="math notranslate nohighlight">\(\textbf{v}\)</span> are 0.</p>
+</section>
+<section id="spider-traps">
+<h3>Spider Traps<a class="headerlink" href="#spider-traps" title="Permalink to this headline">#</a></h3>
+<p>Another issue that PageRank algorithm has to face is the existence of spider traps. A spider trap is a set of nodes with no dead ends but no link out of the set of nodes comprising the spider trap. The effect on the PageRank algorithm is the opposite of deadends. Whereas in deadends information “leaks out” from the deadend, in the case of spider traps, they get accumulated.
+Graph 3 shown by <a class="reference internal" href="#spider-trap"><span class="std std-numref">Fig. 9</span></a> below is an example of a network with a 1-node spider trap.</p>
+<figure class="align-default" id="spider-trap">
+<a class="reference internal image-reference" href="../_images/SpiderTrap.PNG"><img alt="../_images/SpiderTrap.PNG" src="../_images/SpiderTrap.PNG" style="width: 450px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">(Graph 3): A network with a spider trap (at node E).</span><a class="headerlink" href="#spider-trap" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>Note</strong>: Earlier versions of NetworkX might not show the self-loop in Node E, that’s why we provided an image above. However, it can be confirmed in the transition matrix below that the self-loop exists if you look at the noting that the entry for row-column of E is 1 (M3[4,4] below).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G3</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+<span class="n">G3</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;C&quot;</span><span class="p">,</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="s2">&quot;E&quot;</span><span class="p">])</span>
+<span class="n">G3</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;C&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;D&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;E&quot;</span><span class="p">),</span> 
+    <span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;A&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;D&quot;</span><span class="p">),</span> 
+    <span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span><span class="s2">&quot;A&quot;</span><span class="p">),</span>    
+    <span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="s2">&quot;C&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;E&quot;</span><span class="p">,</span><span class="s2">&quot;E&quot;</span><span class="p">),</span>
+<span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>  
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Graph 3. A network with a spider trap (at node E).&quot;</span><span class="p">)</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">circular_layout</span><span class="p">(</span><span class="n">G3</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G3</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/pagerank_64_0.png" src="../_images/pagerank_64_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M3</span> <span class="o">=</span> <span class="n">transition_matrix</span><span class="p">(</span><span class="n">G3</span><span class="p">)</span>
+<span class="n">M3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.  , 0.5 , 1.  , 0.  , 0.  ],
+       [0.25, 0.  , 0.  , 0.5 , 0.  ],
+       [0.25, 0.  , 0.  , 0.5 , 0.  ],
+       [0.25, 0.5 , 0.  , 0.  , 0.  ],
+       [0.25, 0.  , 0.  , 0.  , 1.  ]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we compute the PageRank, we’ll notice that all the traffic goes to node E.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">idealized_page_rank</span><span class="p">(</span><span class="n">M3</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">rint</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0., 0., 0., 0., 1.])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="pagerank-with-taxation">
+<h2>PageRank with Taxation<a class="headerlink" href="#pagerank-with-taxation" title="Permalink to this headline">#</a></h2>
+<p>A solution to the two issues we mentioned above (deadends and spider traps) is to allow each random surfer to <em>teleport</em> with a small probability <span class="math notranslate nohighlight">\(\beta\)</span> rather than following an out-link in its current page. This method of random teleportation is called <em>taxation</em> in the textbook.</p>
+<p>If <span class="math notranslate nohighlight">\(\textbf{e}\)</span> is a vector of 1’s of size <span class="math notranslate nohighlight">\(n\)</span>, The iteration step now becomes:</p>
+<p><span class="math notranslate nohighlight">\(
+    \textbf{v}^{(t+1)}= \beta M\textbf{v}^{(t)} + (1-\beta)\textbf{e}/n
+\)</span></p>
+<p><span class="math notranslate nohighlight">\(\beta\)</span> values are usually chosen in the range of 0.8 to 0.9.</p>
+<p>We create a taxed version of the PageRank below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">taxed_page_rank</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mi">10</span><span class="o">**-</span><span class="mi">6</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute the Taxed PageRank (without Taxation) of a given Transition Matrix    </span>
+<span class="sd">       Note that this not make use of `e` -- the vector of ones </span>
+<span class="sd">       since numpy&#39;s broadcasting takes care of properly computing a vector-constant addition</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    M : numpy array</span>
+<span class="sd">        Transition Matrix: Array of shape (n, n), where n is the number of nodes in the network</span>
+<span class="sd">    tol : float</span>
+<span class="sd">        Tolerance: Iteration stops if the distance between previous and updated PageRank vectors </span>
+<span class="sd">        goes below this value</span>
+<span class="sd">    max_iter : integer</span>
+<span class="sd">        Maximum number of iterations</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    v : numpy array</span>
+<span class="sd">        Vector of size n containing the ordinary PageRank values </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">n</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>  
+    <span class="n">delta</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">tol</span> <span class="c1"># initialize vector difference to a large number</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">delta</span> <span class="o">&gt;</span> <span class="n">tol</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">prev_v</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">beta</span><span class="o">*</span><span class="n">M</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">+</span> <span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">beta</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="p">)</span>  
+        <span class="n">delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">v</span><span class="o">-</span><span class="n">prev_v</span><span class="p">))</span>  <span class="c1"># compute L1 norm  </span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">max_iter</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">v</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M3</span> <span class="o">=</span> <span class="n">transition_matrix</span><span class="p">(</span><span class="n">G3</span><span class="p">)</span>
+<span class="n">taxed_page_rank</span><span class="p">(</span><span class="n">M3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.2       , 0.13333334, 0.13333334, 0.13333334, 0.40000391])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-pagerank-in-search-engine">
+<h2>Using PageRank in Search Engine<a class="headerlink" href="#using-pagerank-in-search-engine" title="Permalink to this headline">#</a></h2>
+<p>Google is said to use over 250 properties of pages from which the ranking is decided, among those properties, PageRank is among the important ones. The others are:</p>
+<ul class="simple">
+<li><p>presence of search terms</p></li>
+<li><p>where the search terms appear in the page (e.g. headers)</p></li>
+<li><p>search terms appearing in pages that link to the page in question</p></li>
+</ul>
+<p><strong>EXERCISES</strong></p>
+<ol class="simple">
+<li><p>As discussed above, Google introduced the innovation of judging the importance of a page by the terms used in the link, and not just hte links that appeared in the page. How does this defeat Term Spam?</p></li>
+<li><p>Why not just count the number of inlinks to a page instead of doing PageRank?</p></li>
+<li><p>Given Graph 1, remove node E and its edges then compute its PageRank. (This is the example give in Lescovec et al.’s book <span id="id1">[<a class="reference internal" href="../bibliography.html#id6" title="Jure Leskovec, Anand Rajaraman, and Jeffrey David Ullman. Mining of massive data sets. Cambridge university press, 2020.">LRU20</a>]</span>).</p></li>
+<li><p>Given Graph 3, remove node E and its edges then compute its Taxed PageRank. (This is the example give in Lescovec et al.’s book <span id="id2">[<a class="reference internal" href="../bibliography.html#id6" title="Jure Leskovec, Anand Rajaraman, and Jeffrey David Ullman. Mining of massive data sets. Cambridge university press, 2020.">LRU20</a>]</span>).</p></li>
+</ol>
+<p><strong>REFERENCE</strong> <span id="id3">[<a class="reference internal" href="../bibliography.html#id6" title="Jure Leskovec, Anand Rajaraman, and Jeffrey David Ullman. Mining of massive data sets. Cambridge university press, 2020.">LRU20</a>]</span></p>
+</section>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Link Analysis</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="pagerank-for-large-data.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">PageRank for Large Data</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By AIM PhD in DS 2024<br/>
+  
+      &copy; Copyright 2022, AIM PhD in DS 2024.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,670 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>What is a Social Network? &#8212; ALIS: Algorithmic Library for Scalability  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=4fea3ae4a0a4ba949df0a89bbae557cc2ce861ae" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom-style.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Network Measures" href="network-measures.html" />
+    <link rel="prev" title="Social Network Graphs" href="index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">ALIS: Algorithmic Library for Scalability  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../installation.html">
+   Installation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../finding-similar-items/index.html">
+   Finding Similar Items
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/set-similarity.html">
+     Set Similarity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/shingling.html">
+     Shingling of Documents
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/minhashing.html">
+     Minhashing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/introduction-to-lsh.html">
+     Locality Sensitive Hashing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/theory-of-lsf.html">
+     Theory of LSF
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/lsh-for-minhash.html">
+     LSH Banding Technique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/the-lsh-class.html">
+     Many-to-Many Document Similarity Task
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/demo-minhash-lsh.html">
+     LSH and Document Similarity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stream-mining/index.html">
+   Stream Mining
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/stream-data-model.html">
+     Stream Data Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/data-stream.html">
+     Sampling Data in a Stream
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/filtering-stream.html">
+     Filtering Streams
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/counting-distinct.html">
+     Counting Distinct Elements in a Stream
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/moments.html">
+     Moments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/counting-ones.html">
+     Counting Ones in a Window
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/common-recent.html">
+     Most Common Recent Elements
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../link-analysis/index.html">
+   Link Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/pagerank.html">
+     PageRank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/pagerank-for-large-data.html">
+     PageRank for Large Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/pagerank-mapreduce.html">
+     PageRank using MapReduce
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/topic-sensitive-pagerank.html">
+     Topic-Sensitive PageRank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/hubs-and-authorities.html">
+     Hubs and Authorities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   Social Network Graphs
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     What is a Social Network?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="network-measures.html">
+     Network Measures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="community-detection.html">
+     Community Detection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="social-network-analysis-using-graphframes.html">
+     Social Network Analysis using GraphFrames
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  API Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/feature_extraction/index.html">
+   Feature Extraction
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/feature_extraction/shingles.html">
+     Shingles
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/feature_extraction/minhash.html">
+     Minhashing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/similarity/index.html">
+   Similarity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/similarity/minhash_lsh.html">
+     Minhash LSH
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/similarity/jaccard.html">
+     Jaccard Similarity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api-docs/stream_mining/index.html">
+   Stream Mining
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api-docs/link_analysis/index.html">
+   Link Analysis
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/network_tools/index.html">
+   Network Tools
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/clustering.html">
+     Clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/metrics.html">
+     Metrics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/plots.html">
+     Plots
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/social-network-graphs/social-network-preliminaries.ipynb.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#social-networks-as-graphs">
+   Social Networks as Graphs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples-of-social-networks">
+   Examples of Social Networks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise">
+   Exercise
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>What is a Social Network?</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#social-networks-as-graphs">
+   Social Networks as Graphs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples-of-social-networks">
+   Examples of Social Networks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise">
+   Exercise
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="what-is-a-social-network">
+<h1>What is a Social Network?<a class="headerlink" href="#what-is-a-social-network" title="Permalink to this headline">#</a></h1>
+<p>Social networks are social structures composed of a collection of social actors (either persons or organizations), a set of dyadic relationships, and other social interactions amongst the actors. The social network approach provides a framework for examining the structure of social entities, as well the theories that explain the patterns observed in these networks. Social network analysis is used to investigate these structures in order to discover local and global patterns, identify influential entities, and investigate network dynamics. Social network analysis studies individual behavior at the micro level, the pattern of relationships (network structure) at the macro level, and the interactions between the two at both levels.</p>
+<p>The essential characteristics of a social network are:</p>
+<ol class="simple">
+<li><p>There is a collection of entities that participate in the network.</p></li>
+<li><p>There is at least one relationship between entities of the network.</p></li>
+<li><p>There is an assumption of nonrandomness or locality.</p></li>
+</ol>
+<section id="social-networks-as-graphs">
+<h2>Social Networks as Graphs<a class="headerlink" href="#social-networks-as-graphs" title="Permalink to this headline">#</a></h2>
+<p>Social networks are represented as graphs, which we may refer to as a social graph. The entities are called nodes, and an edge joins two nodes if the nodes are associated through the network’s relationship. Social graphs can be undirected graphs (<a class="reference internal" href="#directed"><span class="std std-numref">Fig. 13</span></a> a) in which  the links have no direction, such as the Facebook friends graph. A directed graph, on the other hand, have edges that point in a specific direction (<a class="reference internal" href="#directed"><span class="std std-numref">Fig. 13</span></a> b), an example of which is the graph of followers on Twitter.</p>
+<figure class="align-default" id="directed">
+<a class="reference internal image-reference" href="../_images/directed.png"><img alt="../_images/directed.png" src="../_images/directed.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">(a) Undirected and (b) directed networks</span><a class="headerlink" href="#directed" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>A network can also be unweighted (<a class="reference internal" href="#weighted"><span class="std std-numref">Fig. 14</span></a> a) or weighted (<a class="reference internal" href="#weighted"><span class="std std-numref">Fig. 14</span></a> b). The weights of the edges in weighted network signifies the strength of the relationship or the frequency of interaction of the nodes. Larger weights mean stronger ties or more frequent interactions.</p>
+<figure class="align-default" id="weighted">
+<a class="reference internal image-reference" href="../_images/weighted.png"><img alt="../_images/weighted.png" src="../_images/weighted.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 14 </span><span class="caption-text">(a) Unweighted and (b) weighted networks</span><a class="headerlink" href="#weighted" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>There are other social phenomena that involve entities of different types. For example, authorship networks can have author nodes and paper nodes. The natural way to represent such information is as a k-partite graph for some k &gt; 1. A k-partite network is made up of k disjoint sets of nodes, with no edges connecting nodes from the same set. For the example in <a class="reference internal" href="#kpartite"><span class="std std-numref">Fig. 15</span></a>, we have a tripartite graph as we have 3 types of nodes as indicated by the color.</p>
+<figure class="align-default" id="kpartite">
+<a class="reference internal image-reference" href="../_images/kpartite.png"><img alt="../_images/kpartite.png" src="../_images/kpartite.png" style="width: 150px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 15 </span><span class="caption-text">(a) k-partite graph</span><a class="headerlink" href="#kpartite" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="examples-of-social-networks">
+<h2>Examples of Social Networks<a class="headerlink" href="#examples-of-social-networks" title="Permalink to this headline">#</a></h2>
+<p>One example of a social network is the telephone network. In telephone networks, nodes represent phone numbers, which are actually distinct individuals. If a call has been placed between two nodes in a specific period of time, such as the previous month or the previous year, then there is a link between them. The weights of the edges could be determined by the number of calls that were made between these phones throughout the time period. Communities will arise in a telephone network as a result of frequent communication between groups of individuals, such as groups of friends, members of a club, or employees of the same firm, for example.</p>
+<p>Individuals are represented by the nodes in email networks, which are also represented by email addresses. An edge represents the fact that at least one email was sent in at least one way between the two addresses. Or we may only assign an edge if there were emails sent both ways. In this manner, spammers are not seen as “friends” with all of their victims. Another technique is to categorize edges as either weak or strong depending on the strength of the relationship or frequency of communication. Strong edges represent communication that took place in both directions (or more frequently if the frequency of communication is being considered), whereas weak edges reflect communication that took place just in one way (or less frequently).</p>
+<p>Shown in <a class="reference internal" href="#karate"><span class="std std-numref">Fig. 16</span></a> is a social network of friendships between 34 members of a karate club at a US university in the 1970s known as Zachary’s karate club. Individuals who were observed engaging in activities outside of the club’s events were linked together via edges. Eventually, a conflict emerged between the club’s president and the instructor, dividing the club into two factions, each of which backed the instructor and the president separately. (indicated by the color of the circles). The question is whether it is possible to infer the composition of the two groups from the network topology that was created initially. By examining the figure, it is possible to distinguish two aggregations: one centered on vertices 33 and 34 (of which 34 is the president), and the other centered on vertex 1 (the instructor). One can also identify other vertices that are located between the two main structures, such as 3, 9, and 10. These vertices are frequently misclassified by community detection methods since they are located between the two main structures. The Zachary’s karate club network is frequently used as a standard benchmark in community detection.</p>
+<figure class="align-default" id="karate">
+<a class="reference internal image-reference" href="../_images/karate_club.png"><img alt="../_images/karate_club.png" src="../_images/karate_club.png" style="width: 350px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">(a) Zachary’s karate club. Social network of friendships between 34 members of a karate club at a US university in the 1970s</span><a class="headerlink" href="#karate" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p><em>CuneytAkcora, CC BY-SA 4.0 <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0">https://creativecommons.org/licenses/by-sa/4.0</a>, via Wikimedia Commons</em></p>
+</section>
+<section id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p>List examples of social network. For each example, specify the nodes and the relationship represented by the edges.</p></li>
+<li><p>Discuss the benefit of representing social networks as weighted and unweighted and directed and undirected graphs.</p></li>
+</ol>
+</section>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Social Network Graphs</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="network-measures.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Network Measures</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By AIM PhD in DS 2024<br/>
+  
+      &copy; Copyright 2022, AIM PhD in DS 2024.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

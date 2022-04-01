@@ -1,0 +1,11 @@
+div.prompt.highlight-none.notranslate {
+    visibility: hidden;
+}
+
+div.nbinput.container div.prompt, div.nboutput.container div.prompt {
+    width: 0px !important;
+}
+
+#site-navigation {
+    width: 250px !important;
+}

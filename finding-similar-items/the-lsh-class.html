@@ -1,0 +1,905 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Many-to-Many Document Similarity Task &#8212; ALIS: Algorithmic Library for Scalability  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=4fea3ae4a0a4ba949df0a89bbae557cc2ce861ae" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom-style.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"TeX": {"equationNumbers": {"autoNumber": "AMS", "useLabelIds": true}}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="LSH and Document Similarity" href="demo-minhash-lsh.html" />
+    <link rel="prev" title="LSH Banding Technique" href="lsh-for-minhash.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">ALIS: Algorithmic Library for Scalability  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../installation.html">
+   Installation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   Finding Similar Items
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="set-similarity.html">
+     Set Similarity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="shingling.html">
+     Shingling of Documents
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="minhashing.html">
+     Minhashing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="introduction-to-lsh.html">
+     Locality Sensitive Hashing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="theory-of-lsf.html">
+     Theory of LSF
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="lsh-for-minhash.html">
+     LSH Banding Technique
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Many-to-Many Document Similarity Task
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="demo-minhash-lsh.html">
+     LSH and Document Similarity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stream-mining/index.html">
+   Stream Mining
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/stream-data-model.html">
+     Stream Data Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/data-stream.html">
+     Sampling Data in a Stream
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/filtering-stream.html">
+     Filtering Streams
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/counting-distinct.html">
+     Counting Distinct Elements in a Stream
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/moments.html">
+     Moments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/counting-ones.html">
+     Counting Ones in a Window
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/common-recent.html">
+     Most Common Recent Elements
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../link-analysis/index.html">
+   Link Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/pagerank.html">
+     PageRank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/pagerank-for-large-data.html">
+     PageRank for Large Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/pagerank-mapreduce.html">
+     PageRank using MapReduce
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/topic-sensitive-pagerank.html">
+     Topic-Sensitive PageRank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/hubs-and-authorities.html">
+     Hubs and Authorities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../social-network-graphs/index.html">
+   Social Network Graphs
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/social-network-preliminaries.html">
+     What is a Social Network?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/network-measures.html">
+     Network Measures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/community-detection.html">
+     Community Detection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/social-network-analysis-using-graphframes.html">
+     Social Network Analysis using GraphFrames
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  API Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/feature_extraction/index.html">
+   Feature Extraction
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/feature_extraction/shingles.html">
+     Shingles
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/feature_extraction/minhash.html">
+     Minhashing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/similarity/index.html">
+   Similarity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/similarity/minhash_lsh.html">
+     Minhash LSH
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/similarity/jaccard.html">
+     Jaccard Similarity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api-docs/stream_mining/index.html">
+   Stream Mining
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api-docs/link_analysis/index.html">
+   Link Analysis
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/network_tools/index.html">
+   Network Tools
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/clustering.html">
+     Clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/metrics.html">
+     Metrics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/plots.html">
+     Plots
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/finding-similar-items/the-lsh-class.ipynb.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-1">
+     Example 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-2">
+     Example 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-3">
+     Example 3
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Many-to-Many Document Similarity Task</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-1">
+     Example 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-2">
+     Example 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-3">
+     Example 3
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="many-to-many-document-similarity-task">
+<h1>Many-to-Many Document Similarity Task<a class="headerlink" href="#many-to-many-document-similarity-task" title="Permalink to this headline">#</a></h1>
+<p>In this section, we implement the traditional LSH appraoch to a hypothetical many-to-many document similarity task. The objective is to bucket similar documents together. The implementation is done through the <code class="docutils literal notranslate"><span class="pre">LSH</span></code> class which leverages on <code class="docutils literal notranslate"><span class="pre">dask.bag</span></code> functionality and methods to <em>parallelize</em> the <strong>banding technique</strong>. Specifically, the map (hash function) and reduce (bucketing) tasks.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">LSH</span></code> has three main methods:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">make_bands</span></code> - This method takes in the desired number of <code class="docutils literal notranslate"><span class="pre">bands</span></code> as a parameter and returns a dictionary with band labels as keys and <code class="docutils literal notranslate"><span class="pre">dask.bag</span></code> of (set/document index, signature band) tuples. Here, signature bands are defined as a slice of a document’s signature.</p>
+<ul>
+<li><p>Parameters</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">bands</span></code> - (int) desired number of bands</p></li>
+</ul>
+</li>
+<li><p>Returns</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">band_dict</span></code> - (dict) dictionary with band labels as keys and (set/doc index, signature band) tuples as values</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_buckets</span></code> - This method implementes the map-reduce step of the traditional banding technique. Specifically, signature slices of each band are hashed using <code class="docutils literal notranslate"><span class="pre">hash_functions</span></code> (map). The document indices are then grouped according to their hash values.</p>
+<ul>
+<li><p>Parameters</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">hash_functions</span></code> - (list, default=None) a list of hash functions with size equivalent to the number of bands. A hash function in the list is applied to a band with the same index. When None, the funciton defaults to using the python builtin <code class="docutils literal notranslate"><span class="pre">hash</span></code> function. <em>Note: python’s hash function value for the same input vary across partitions–hence, current implementation stores all elements of a band in one partition.</em></p></li>
+</ul>
+</li>
+<li><p>Returns</p>
+<ul>
+<li><p>band_buckets - (dict) a dictionary with hash bucket as keys and a list of similar document indices as values.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot_thresh</span></code> - Shows the S-curve corresponding to the choice of number of <code class="docutils literal notranslate"><span class="pre">bands</span></code>. The similirity threshold (i.e., the Jaccard similarity value that is the basis of tagging a pair as candidate pairs or not) is emphasized.</p>
+<ul>
+<li><p>Paramters</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">display_thresh</span></code> - (bool, default=True) whether to display emphasis on the similarity threshold or not.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ax</span></code> - (<code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span> <span class="pre">Axis</span></code>, default=None) axis for plotting.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> - keyword arguments for the <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.plot()</span></code> function.</p></li>
+</ul>
+</li>
+<li><p>Returns</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code> Axis object</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<p>Here we demonstrate the use of the <code class="docutils literal notranslate"><span class="pre">LSH</span></code> class on some examples. First off, make sure that a a <code class="docutils literal notranslate"><span class="pre">dask.distributed.Client</span></code> is initialized since class methods take advantage of the <code class="docutils literal notranslate"><span class="pre">dask</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">from</span> <span class="nn">alis.similarity</span> <span class="kn">import</span> <span class="n">LSH</span>
+
+
+<span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="example-1">
+<h3>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">#</a></h3>
+<p>Suppose a signature matrix with dimensions <span class="math notranslate nohighlight">\((n, m)\)</span>–where <span class="math notranslate nohighlight">\(n\)</span> is the number of documents/sets and <span class="math notranslate nohighlight">\(m\)</span> as the size of each signature vector. Signature vector values are randomly set to be within the 0 to 255 range.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># samples (rows)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># signature features (columns)</span>
+
+<span class="c1"># signature matrix</span>
+<span class="n">signature</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">signature</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[128,  85, 248, ..., 226,  99,  91],
+       [247,  40, 159, ...,  39, 180,  52],
+       [161, 150,  16, ..., 138,  26, 230],
+       ...,
+       [200,  51, 193, ..., 141,  16, 245],
+       [ 28, 117,  35, ..., 236, 206, 252],
+       [180, 183,  98, ..., 240, 172,  23]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Running the <code class="docutils literal notranslate"><span class="pre">get_buckets</span></code> function <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">compute=False</span></code> returns a <code class="docutils literal notranslate"><span class="pre">dask.bag</span></code> which can be inspected further using <code class="docutils literal notranslate"><span class="pre">dask.bag</span></code> functions, such as <code class="docutils literal notranslate"><span class="pre">filter</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lsh</span> <span class="o">=</span> <span class="n">LSH</span><span class="p">(</span><span class="n">signature</span><span class="p">)</span>
+<span class="n">lsh</span><span class="o">.</span><span class="n">make_bands</span><span class="p">(</span><span class="n">bands</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rows per band: &quot;</span><span class="p">,</span> <span class="n">lsh</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of bands: &quot;</span><span class="p">,</span> <span class="n">lsh</span><span class="o">.</span><span class="n">bands</span><span class="p">)</span>
+<span class="n">buckets</span> <span class="o">=</span> <span class="n">lsh</span><span class="o">.</span><span class="n">get_buckets</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Group of buckets: &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">buckets</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">buckets</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rows per band:  10
+Number of bands:  10
+Group of buckets:  10
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: dask.bag&lt;lambda, npartitions=1&gt;,
+ 1: dask.bag&lt;lambda, npartitions=1&gt;,
+ 2: dask.bag&lt;lambda, npartitions=1&gt;,
+ 3: dask.bag&lt;lambda, npartitions=1&gt;,
+ 4: dask.bag&lt;lambda, npartitions=1&gt;,
+ 5: dask.bag&lt;lambda, npartitions=1&gt;,
+ 6: dask.bag&lt;lambda, npartitions=1&gt;,
+ 7: dask.bag&lt;lambda, npartitions=1&gt;,
+ 8: dask.bag&lt;lambda, npartitions=1&gt;,
+ 9: dask.bag&lt;lambda, npartitions=1&gt;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Due to randomness of the dummy signature matrix values, we expect zero to minimal collisions. Filter results show that all bands return no similar signatures.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">buckets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since the the signature matrix is relatively small, we can verify the lack in collisions by inspecting the threshold (i.e., through the <code class="docutils literal notranslate"><span class="pre">plot_thresh</span></code> method) and comparing it with the actual Jaccard similarity distribution of the signature marix. Exhaustively calculating the Jaccard similarity for all pairs may require some waiting time, ~30 seconds on a standard machine.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plotting the s-curve</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">lsh</span><span class="o">.</span><span class="n">plot_thresh</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/the-lsh-class_11_0.png" src="../_images/the-lsh-class_11_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">jaccard</span>
+
+<span class="k">def</span> <span class="nf">jaccard_sim</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">jaccard</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+<span class="n">similarities</span> <span class="o">=</span> <span class="p">[</span><span class="n">jaccard_sim</span><span class="p">(</span><span class="n">signature</span><span class="p">[</span><span class="n">u_idx</span><span class="p">],</span> <span class="n">signature</span><span class="p">[</span><span class="n">v_idx</span><span class="p">])</span> \
+                <span class="k">for</span> <span class="n">u_idx</span><span class="p">,</span> <span class="n">v_idx</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span> <span class="mi">2</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># jaccard similarity distribution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">similarities</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/the-lsh-class_13_0.png" src="../_images/the-lsh-class_13_0.png" />
+</div>
+</div>
+<p>The above example illustrates a signature matrix with very low similarity scores as confirmed by the distribution plot of actual Jaccard similarities.</p>
+</section>
+<section id="example-2">
+<h3>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">#</a></h3>
+<p>Suppose we have a signature matrix where all items are similar. We see that across all bands, all the samples are placed in the same buckets. This time, we pass the <code class="docutils literal notranslate"><span class="pre">compute=True</span></code> flag to cast the <code class="docutils literal notranslate"><span class="pre">dask.bags</span></code> into a lists as values to the dictionary output of <code class="docutils literal notranslate"><span class="pre">get_buckets</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># some edge case : all items are similar</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># all values are 1</span>
+<span class="n">signature</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">lsh</span> <span class="o">=</span> <span class="n">LSH</span><span class="p">(</span><span class="n">signature</span><span class="p">)</span>
+<span class="n">lsh</span><span class="o">.</span><span class="n">make_bands</span><span class="p">(</span><span class="n">bands</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rows per band: &quot;</span><span class="p">,</span> <span class="n">lsh</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of bands: &quot;</span><span class="p">,</span> <span class="n">lsh</span><span class="o">.</span><span class="n">bands</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">lsh</span><span class="o">.</span><span class="n">get_buckets</span><span class="p">(</span><span class="n">compute</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rows per band:  10
+Number of bands:  10
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: [(-4511045881551967787, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])],
+ 1: [(-8359770896084742983, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])],
+ 2: [(2866674764794135345, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])],
+ 3: [(-4164649050109038293, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])],
+ 4: [(-4511045881551967787, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])],
+ 5: [(-8359770896084742983, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])],
+ 6: [(2866674764794135345, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])],
+ 7: [(-4164649050109038293, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])],
+ 8: [(-4511045881551967787, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])],
+ 9: [(-8359770896084742983, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])]}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-3">
+<h3>Example 3<a class="headerlink" href="#example-3" title="Permalink to this headline">#</a></h3>
+<p>Suppose now another signature matrix where there are two groups of sets that are similar. We shall observe that for each band, we have two buckets corresponding to the two similarity groups (1’s group and 2’s group).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># two similar groups</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># total of 20 samples</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># concatentate two full matrices: matrix of 1&#39;s and 2&#39;s</span>
+<span class="n">signature</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">),</span> <span class="mi">2</span><span class="p">)))</span>
+
+<span class="n">lsh</span> <span class="o">=</span> <span class="n">LSH</span><span class="p">(</span><span class="n">signature</span><span class="p">)</span>
+<span class="n">lsh</span><span class="o">.</span><span class="n">make_bands</span><span class="p">(</span><span class="n">bands</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rows per band: &quot;</span><span class="p">,</span> <span class="n">lsh</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of bands: &quot;</span><span class="p">,</span> <span class="n">lsh</span><span class="o">.</span><span class="n">bands</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">lsh</span><span class="o">.</span><span class="n">get_buckets</span><span class="p">(</span><span class="n">compute</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rows per band:  10
+Number of bands:  10
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: [(2866674764794135345, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+  (-8148071392985430698, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19])],
+ 1: [(-4164649050109038293, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+  (7929749226918372346, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19])],
+ 2: [(-4511045881551967787, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+  (499418812276172301, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19])],
+ 3: [(-8359770896084742983, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+  (5464707384305557384, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19])],
+ 4: [(2866674764794135345, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+  (-8148071392985430698, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19])],
+ 5: [(-4164649050109038293, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+  (7929749226918372346, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19])],
+ 6: [(-4511045881551967787, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+  (499418812276172301, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19])],
+ 7: [(-8359770896084742983, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+  (5464707384305557384, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19])],
+ 8: [(2866674764794135345, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+  (-8148071392985430698, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19])],
+ 9: [(-4164649050109038293, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+  (7929749226918372346, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19])]}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="lsh-for-minhash.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">LSH Banding Technique</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="demo-minhash-lsh.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">LSH and Document Similarity</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By AIM PhD in DS 2024<br/>
+  
+      &copy; Copyright 2022, AIM PhD in DS 2024.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

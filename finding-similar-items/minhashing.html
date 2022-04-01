@@ -1,0 +1,1052 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Minhashing &#8212; ALIS: Algorithmic Library for Scalability  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=4fea3ae4a0a4ba949df0a89bbae557cc2ce861ae" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom-style.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"TeX": {"equationNumbers": {"autoNumber": "AMS", "useLabelIds": true}}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Locality Sensitive Hashing" href="introduction-to-lsh.html" />
+    <link rel="prev" title="Shingling of Documents" href="shingling.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">ALIS: Algorithmic Library for Scalability  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../installation.html">
+   Installation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   Finding Similar Items
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="set-similarity.html">
+     Set Similarity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="shingling.html">
+     Shingling of Documents
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Minhashing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="introduction-to-lsh.html">
+     Locality Sensitive Hashing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="theory-of-lsf.html">
+     Theory of LSF
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="lsh-for-minhash.html">
+     LSH Banding Technique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="the-lsh-class.html">
+     Many-to-Many Document Similarity Task
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="demo-minhash-lsh.html">
+     LSH and Document Similarity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stream-mining/index.html">
+   Stream Mining
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/stream-data-model.html">
+     Stream Data Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/data-stream.html">
+     Sampling Data in a Stream
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/filtering-stream.html">
+     Filtering Streams
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/counting-distinct.html">
+     Counting Distinct Elements in a Stream
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/moments.html">
+     Moments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/counting-ones.html">
+     Counting Ones in a Window
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/common-recent.html">
+     Most Common Recent Elements
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../link-analysis/index.html">
+   Link Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/pagerank.html">
+     PageRank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/pagerank-for-large-data.html">
+     PageRank for Large Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/pagerank-mapreduce.html">
+     PageRank using MapReduce
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/topic-sensitive-pagerank.html">
+     Topic-Sensitive PageRank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/hubs-and-authorities.html">
+     Hubs and Authorities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../social-network-graphs/index.html">
+   Social Network Graphs
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/social-network-preliminaries.html">
+     What is a Social Network?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/network-measures.html">
+     Network Measures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/community-detection.html">
+     Community Detection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/social-network-analysis-using-graphframes.html">
+     Social Network Analysis using GraphFrames
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  API Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/feature_extraction/index.html">
+   Feature Extraction
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/feature_extraction/shingles.html">
+     Shingles
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/feature_extraction/minhash.html">
+     Minhashing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/similarity/index.html">
+   Similarity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/similarity/minhash_lsh.html">
+     Minhash LSH
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/similarity/jaccard.html">
+     Jaccard Similarity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api-docs/stream_mining/index.html">
+   Stream Mining
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api-docs/link_analysis/index.html">
+   Link Analysis
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/network_tools/index.html">
+   Network Tools
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/clustering.html">
+     Clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/metrics.html">
+     Metrics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/plots.html">
+     Plots
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/finding-similar-items/minhashing.ipynb.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#minhash-signatures">
+   Minhash Signatures
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#minhash-and-jaccard-similarity">
+     Minhash and Jaccard Similarity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computing-minhash-signatures">
+   Computing Minhash Signatures
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithm-for-generating-minhash-signatures">
+     Algorithm for Generating Minhash Signatures
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-1">
+     Example 1
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#solution">
+       Solution
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#applying-shingling-and-minhashing-on-a-real-world-dataset">
+   Applying Shingling and Minhashing on a Real-World Dataset
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Minhashing</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#minhash-signatures">
+   Minhash Signatures
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#minhash-and-jaccard-similarity">
+     Minhash and Jaccard Similarity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computing-minhash-signatures">
+   Computing Minhash Signatures
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithm-for-generating-minhash-signatures">
+     Algorithm for Generating Minhash Signatures
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-1">
+     Example 1
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#solution">
+       Solution
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#applying-shingling-and-minhashing-on-a-real-world-dataset">
+   Applying Shingling and Minhashing on a Real-World Dataset
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="minhashing">
+<h1>Minhashing<a class="headerlink" href="#minhashing" title="Permalink to this headline">#</a></h1>
+<p>The core problem of storing shingles is that they can be too large. One way to circumvent this problem is to replace the large sets required by this shingles into smaller representations thorugh the use of <strong>signatures</strong>.</p>
+<p>One property of signatures should have is that it should be able to compare two different documents and be able to calculate the Jaccard similarity using those signature alone. Although it would be hard to give the exact similarity of the sets, if we can provide an estimate that is close enough, it would suit our use-case. Another quality that we would like is that if we make our signature larger, the more accurate should the estimate be.</p>
+<section id="minhash-signatures">
+<h2>Minhash Signatures<a class="headerlink" href="#minhash-signatures" title="Permalink to this headline">#</a></h2>
+<p>We designate the <strong>minhash</strong> of a characteristic matrix as the signature for each documents which is a result of a large number of hash calculations. To obtain the minhash of a set, we first permute the rows of the characteristic matrix, then, designate the minhash value of the column as the number of the first row (after permutation), wherein the column has a value of <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/minhashing.png"><img alt="../_images/minhashing.png" src="../_images/minhashing.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Computing the minhash value entails permuting the rows then finding the first row in which the column has a 1.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Say a given minhash function <span class="math notranslate nohighlight">\(h\)</span> permutes the rows of a characteristic matrix according to <a class="reference internal" href="#id1"><span class="std std-numref">Fig. 4</span></a>. In this case, the minhash value of <span class="math notranslate nohighlight">\(A\)</span> is given by <span class="math notranslate nohighlight">\(h(A) = I_2\)</span>. For <span class="math notranslate nohighlight">\(B\)</span>, since the first row is <span class="math notranslate nohighlight">\(I_4\)</span>, it follows that <span class="math notranslate nohighlight">\(h(B) = I_4\)</span>. For <span class="math notranslate nohighlight">\(C\)</span>, we also get <span class="math notranslate nohighlight">\(h(C) = I_2\)</span>, and finally for <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(h(D) = I_1\)</span>.</p>
+<section id="minhash-and-jaccard-similarity">
+<h3>Minhash and Jaccard Similarity<a class="headerlink" href="#minhash-and-jaccard-similarity" title="Permalink to this headline">#</a></h3>
+<p>The Minhash signature will only be useful if we can use it to compare two different documents and estimate their similarity from the obtained signatures. The connection between the minhash of a document and Jaccard similarity becomes clear from the following theorem <span id="id2">[<a class="reference internal" href="../bibliography.html#id4" title="Anand Rajaraman and Jeffrey David Ullman. Mining of massive datasets. Cambridge University Press, 2011.">RU11</a>]</span>:</p>
+<blockquote>
+<div><p>The probability that the minhash function for a random permutation of rows produces the same value for two sets equals the Jaccard similarity</p>
+</div></blockquote>
+<p>To prove this theorem, consider two sets <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_2\)</span>, the rows can either be any of the three types:</p>
+<ol class="simple">
+<li><p>Type <span class="math notranslate nohighlight">\(X\)</span> rows have <span class="math notranslate nohighlight">\(1\)</span> in both columns</p></li>
+<li><p>Type <span class="math notranslate nohighlight">\(Y\)</span> rows have <span class="math notranslate nohighlight">\(1\)</span> in one of the columns and <span class="math notranslate nohighlight">\(0\)</span> in the other</p></li>
+<li><p>Type <span class="math notranslate nohighlight">\(Z\)</span> rows have <span class="math notranslate nohighlight">\(0\)</span> in both columns</p></li>
+</ol>
+<p>Since the characteristic matrix is expected to be sparse, most of the rows will be of type <span class="math notranslate nohighlight">\(Z\)</span>. However, the ration of the type <span class="math notranslate nohighlight">\(X\)</span> and type <span class="math notranslate nohighlight">\(Y\)</span> rows will determine the similarity of the documents <span class="math notranslate nohighlight">\(SIM(S_1, S_2)\)</span> as well as the probability that <span class="math notranslate nohighlight">\(h(S_1) = h(S_2)\)</span>.</p>
+<p>We can show this by letting <span class="math notranslate nohighlight">\(x\)</span> be the type number of rows of type <span class="math notranslate nohighlight">\(X\)</span>, while <span class="math notranslate nohighlight">\(y\)</span> be the number of rows of type <span class="math notranslate nohighlight">\(Y\)</span>. Given this, the Jaccard similarity then is equal to:</p>
+<div class="math notranslate nohighlight">
+\[
+SIM (S_1, S_2) = \frac{x}{x + y}
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(x\)</span> will be the size of <span class="math notranslate nohighlight">\(S_1 \cap S_2\)</span> and <span class="math notranslate nohighlight">\(x + y\)</span> will be the size of <span class="math notranslate nohighlight">\(S_1 \cup S_2\)</span>.</p>
+<p>To prove now that the probability that <span class="math notranslate nohighlight">\(h(S_1) = h(S_2)\)</span> will be equivalent of the above expression. Consider the case where we permute the rows randomly and proceed from the top, the probability that we shall meet a type <span class="math notranslate nohighlight">\(X\)</span> row before we meet a type <span class="math notranslate nohighlight">\(Y\)</span> row. This probability will be equal to <span class="math notranslate nohighlight">\(\frac{x}{x + y}\)</span>. But if the first row from the top other than type <span class="math notranslate nohighlight">\(Z\)</span> rows is a type <span class="math notranslate nohighlight">\(X\)</span> row, then we definitely get <span class="math notranslate nohighlight">\(h(S_1) = h(S_2)\)</span>. If the first row that we meet is a type <span class="math notranslate nohighlight">\(Y\)</span> row, then the set with <span class="math notranslate nohighlight">\(1\)</span> gets teh row as its minhash value.</p>
+<p>Therefore, we see that when we get <span class="math notranslate nohighlight">\(h(S_1) \neq h(S_2)\)</span>, we meet a type <span class="math notranslate nohighlight">\(Y\)</span> row. As such, we can conclude that the probability that <span class="math notranslate nohighlight">\(h(S_1) = h(S_2)\)</span> is <span class="math notranslate nohighlight">\(\frac{x}{x + y}\)</span> which is equivalent of the Jaccard similarity of <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_2\)</span>.</p>
+</section>
+</section>
+<section id="computing-minhash-signatures">
+<h2>Computing Minhash Signatures<a class="headerlink" href="#computing-minhash-signatures" title="Permalink to this headline">#</a></h2>
+<p>To create <strong>minhash signatures</strong>, we consider a series of minhash functions <span class="math notranslate nohighlight">\(h_1, h_2, ..., h_n\)</span>. Each of these minhash functions generates different permutations of the rows of the characteristic matrix. Thus, for each set <span class="math notranslate nohighlight">\(S\)</span>, the minhash signature is the vector <span class="math notranslate nohighlight">\([h_1(S), h_2(S), ..., h_n(S)]\)</span>. We may therefore represent the signature of a characteristic matrix <span class="math notranslate nohighlight">\(M\)</span> to be a matrix with the same number of columns, where each column represent the set in the matrix, but the rows may be replaced by the minhash signature for the set in the <span class="math notranslate nohighlight">\(i\)</span>-th column.</p>
+<p>One challenge in creating minhash signatures is that it is usually not feasuible to permute a large characteristic matrix explicity. As such, we may simulate the effect of random permutations by using a random minhash function taht maps row numbers to as many buckets as there are rows.</p>
+<div class="admonition-note-universal-hashing admonition">
+<p class="admonition-title">Note: Universal Hashing</p>
+<p>One effective means for generating hashes is as follows: generate two random numbers <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> in the interval <span class="math notranslate nohighlight">\([0, D)\)</span>, and return the value of <span class="math notranslate nohighlight">\(hash(x) = (ax + b) mod D\)</span></p>
+</div>
+<section id="algorithm-for-generating-minhash-signatures">
+<h3>Algorithm for Generating Minhash Signatures<a class="headerlink" href="#algorithm-for-generating-minhash-signatures" title="Permalink to this headline">#</a></h3>
+<p>Now we can proceed to define the algorithm for generating minhash signatures.</p>
+<p>First, we pick <span class="math notranslate nohighlight">\(n\)</span> random hash functions <span class="math notranslate nohighlight">\(h_1, h_2, ..., h_N\)</span>. Then, construct the signature matrix by considering each row based on their given order. We then let <span class="math notranslate nohighlight">\(SIG(i, c)\)</span> be the signature element for the <span class="math notranslate nohighlight">\(i\)</span>-th hash function and column <span class="math notranslate nohighlight">\(c\)</span>.</p>
+<p>At the start, we initialize all the signature values <span class="math notranslate nohighlight">\(SIG(i, c)\)</span> to be <span class="math notranslate nohighlight">\(\infty\)</span> for all <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(c\)</span>. We then iterate through each row <span class="math notranslate nohighlight">\(r\)</span> in the characteristic matrix as follows:</p>
+<ol class="simple">
+<li><p>Compute <span class="math notranslate nohighlight">\(h_1(r), h_2(r), ..., h_n(r)\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(c\)</span> has <span class="math notranslate nohighlight">\(0\)</span> in row <span class="math notranslate nohighlight">\(r\)</span>, do nothing.</p></li>
+<li><p>However, if <span class="math notranslate nohighlight">\(c\)</span> has <span class="math notranslate nohighlight">\(1\)</span> in row <span class="math notranslate nohighlight">\(r\)</span>, then for each <span class="math notranslate nohighlight">\(i = 1, 2, 3, ..., n\)</span>, set <span class="math notranslate nohighlight">\(SIG(i, c)\)</span> to the smaller of the current value of <span class="math notranslate nohighlight">\(SIG(i, c)\)</span> and <span class="math notranslate nohighlight">\(h_i(r)\)</span>.</p></li>
+</ol>
+</section>
+<section id="example-1">
+<h3>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">#</a></h3>
+<p>Note: This example is taken from <span id="id3">[<a class="reference internal" href="../bibliography.html#id4" title="Anand Rajaraman and Jeffrey David Ullman. Mining of massive datasets. Cambridge University Press, 2011.">RU11</a>]</span>.</p>
+<p>Consider the characteristic matrix given by</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Row</p></th>
+<th class="head"><p><em>S<sub>1</sub></em></p></th>
+<th class="head"><p><em>S<sub>2</sub></em></p></th>
+<th class="head"><p><em>S<sub>3</sub></em></p></th>
+<th class="head"><p><em>S<sub>4</sub></em></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>0</strong></p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>1</strong></p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>2</strong></p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>3</strong></p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>4</strong></p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+<p>Then we choose two hash functions:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+h_1(x) = x + 1 \text{ mod } 5 \\
+h_2(x) = 3x + 1 \text{ mod } 5
+\end{split}\]</div>
+<p>Compute for the minhash signature of this characteristic matrix given the two minhash function defined above.</p>
+<section id="solution">
+<h4>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">#</a></h4>
+<div class="toggle docutils container">
+<p>Step 1: We initialize the signature matrix to contain all <span class="math notranslate nohighlight">\(\infty\)</span></p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><em>S<sub>1</sub></em></p></th>
+<th class="head"><p><em>S<sub>2</sub></em></p></th>
+<th class="head"><p><em>S<sub>3</sub></em></p></th>
+<th class="head"><p><em>S<sub>4</sub></em></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>h<sub>1</sub></strong></p></td>
+<td><p><strong>∞</strong></p></td>
+<td><p><strong>∞</strong></p></td>
+<td><p><strong>∞</strong></p></td>
+<td><p><strong>∞</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>h<sub>2</sub></strong></p></td>
+<td><p><strong>∞</strong></p></td>
+<td><p><strong>∞</strong></p></td>
+<td><p><strong>∞</strong></p></td>
+<td><p><strong>∞</strong></p></td>
+</tr>
+</tbody>
+</table>
+<p>Step 2: Iterate through rows of the characteristic matrix</p>
+<p><em>For row 0</em></p>
+<p>Values of both <span class="math notranslate nohighlight">\(h_1(0)\)</span> and <span class="math notranslate nohighlight">\(h_2(0)\)</span> are both <span class="math notranslate nohighlight">\(1\)</span>. While only sets <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_4\)</span> have the <span class="math notranslate nohighlight">\(1\)</span>s in row <span class="math notranslate nohighlight">\(0\)</span>. Since <span class="math notranslate nohighlight">\(1\)</span> is less than <span class="math notranslate nohighlight">\(\infty\)</span>, we change the values in the columns for <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_4\)</span>.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><em>S<sub>1</sub></em></p></th>
+<th class="head"><p><em>S<sub>2</sub></em></p></th>
+<th class="head"><p><em>S<sub>3</sub></em></p></th>
+<th class="head"><p><em>S<sub>4</sub></em></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>h<sub>1</sub></strong></p></td>
+<td><p><strong>1</strong></p></td>
+<td><p><strong>∞</strong></p></td>
+<td><p><strong>∞</strong></p></td>
+<td><p><strong>1</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>h<sub>2</sub></strong></p></td>
+<td><p><strong>1</strong></p></td>
+<td><p><strong>∞</strong></p></td>
+<td><p><strong>∞</strong></p></td>
+<td><p><strong>1</strong></p></td>
+</tr>
+</tbody>
+</table>
+<p><em>For row 1</em></p>
+<p>The hash values are <span class="math notranslate nohighlight">\(h_1(1) = 2\)</span> and <span class="math notranslate nohighlight">\(h_2(1) = 4\)</span>. Only <span class="math notranslate nohighlight">\(S_3\)</span> has <span class="math notranslate nohighlight">\(1\)</span> in this row. Thus we set the values in column <span class="math notranslate nohighlight">\(S_3\)</span> as <span class="math notranslate nohighlight">\(2\)</span> and <span class="math notranslate nohighlight">\(4\)</span> successively.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><em>S<sub>1</sub></em></p></th>
+<th class="head"><p><em>S<sub>2</sub></em></p></th>
+<th class="head"><p><em>S<sub>3</sub></em></p></th>
+<th class="head"><p><em>S<sub>4</sub></em></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>h<sub>1</sub></strong></p></td>
+<td><p><strong>1</strong></p></td>
+<td><p><strong>∞</strong></p></td>
+<td><p><strong>2</strong></p></td>
+<td><p><strong>1</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>h<sub>2</sub></strong></p></td>
+<td><p><strong>1</strong></p></td>
+<td><p><strong>∞</strong></p></td>
+<td><p><strong>4</strong></p></td>
+<td><p><strong>1</strong></p></td>
+</tr>
+</tbody>
+</table>
+<p><em>For row 2</em></p>
+<p>The hash values are <span class="math notranslate nohighlight">\(h_1(2) = 3\)</span> and <span class="math notranslate nohighlight">\(h_2(2) = 2\)</span>. <span class="math notranslate nohighlight">\(S_2\)</span> and <span class="math notranslate nohighlight">\(S_4\)</span> has <span class="math notranslate nohighlight">\(1\)</span> in this row. However, at <span class="math notranslate nohighlight">\(S_4\)</span> <span class="math notranslate nohighlight">\(3\)</span> and <span class="math notranslate nohighlight">\(2\)</span> are higher than <span class="math notranslate nohighlight">\(1\)</span>. Thus we only set <span class="math notranslate nohighlight">\(3\)</span> and <span class="math notranslate nohighlight">\(2\)</span> to the rows of <span class="math notranslate nohighlight">\(S_2\)</span>.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><em>S<sub>1</sub></em></p></th>
+<th class="head"><p><em>S<sub>2</sub></em></p></th>
+<th class="head"><p><em>S<sub>3</sub></em></p></th>
+<th class="head"><p><em>S<sub>4</sub></em></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>h<sub>1</sub></strong></p></td>
+<td><p><strong>1</strong></p></td>
+<td><p><strong>3</strong></p></td>
+<td><p><strong>2</strong></p></td>
+<td><p><strong>1</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>h<sub>2</sub></strong></p></td>
+<td><p><strong>1</strong></p></td>
+<td><p><strong>2</strong></p></td>
+<td><p><strong>4</strong></p></td>
+<td><p><strong>1</strong></p></td>
+</tr>
+</tbody>
+</table>
+<p><em>For row 3</em></p>
+<p>The hash values are <span class="math notranslate nohighlight">\(h_1(3) = 4\)</span> and <span class="math notranslate nohighlight">\(h_2(3) = 0\)</span>. Only <span class="math notranslate nohighlight">\(S_2\)</span> has no <span class="math notranslate nohighlight">\(1\)</span> in this row. However, the current <span class="math notranslate nohighlight">\(h_1\)</span> values for all the other sets are less than <span class="math notranslate nohighlight">\(4\)</span>. Thus we only change their <span class="math notranslate nohighlight">\(h_2\)</span> values.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><em>S<sub>1</sub></em></p></th>
+<th class="head"><p><em>S<sub>2</sub></em></p></th>
+<th class="head"><p><em>S<sub>3</sub></em></p></th>
+<th class="head"><p><em>S<sub>4</sub></em></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>h<sub>1</sub></strong></p></td>
+<td><p><strong>1</strong></p></td>
+<td><p><strong>3</strong></p></td>
+<td><p><strong>2</strong></p></td>
+<td><p><strong>1</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>h<sub>2</sub></strong></p></td>
+<td><p><strong>0</strong></p></td>
+<td><p><strong>2</strong></p></td>
+<td><p><strong>0</strong></p></td>
+<td><p><strong>0</strong></p></td>
+</tr>
+</tbody>
+</table>
+<p><em>For row 4</em></p>
+<p>The hash values are <span class="math notranslate nohighlight">\(h_1(4) = 0\)</span> and <span class="math notranslate nohighlight">\(h_2(4) = 3\)</span>. Only <span class="math notranslate nohighlight">\(S_3\)</span> has <span class="math notranslate nohighlight">\(1\)</span> in this row. However, the current <span class="math notranslate nohighlight">\(h_2\)</span> value for <span class="math notranslate nohighlight">\(S_3\)</span> is less than <span class="math notranslate nohighlight">\(3\)</span>. Thus we only change their <span class="math notranslate nohighlight">\(h_1\)</span> value as <span class="math notranslate nohighlight">\(0\)</span>.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><em>S<sub>1</sub></em></p></th>
+<th class="head"><p><em>S<sub>2</sub></em></p></th>
+<th class="head"><p><em>S<sub>3</sub></em></p></th>
+<th class="head"><p><em>S<sub>4</sub></em></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>h<sub>1</sub></strong></p></td>
+<td><p><strong>1</strong></p></td>
+<td><p><strong>3</strong></p></td>
+<td><p><strong>0</strong></p></td>
+<td><p><strong>1</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>h<sub>2</sub></strong></p></td>
+<td><p><strong>0</strong></p></td>
+<td><p><strong>2</strong></p></td>
+<td><p><strong>0</strong></p></td>
+<td><p><strong>0</strong></p></td>
+</tr>
+</tbody>
+</table>
+<p>Afterwards, we can then use this signature matrix to estimate the Jaccard similarities of the underlying sets.</p>
+<p>For example the estimated <span class="math notranslate nohighlight">\(SIM(S_1, S_4) = 1\)</span>, while the true Jaccard similairty is <span class="math notranslate nohighlight">\(2/3\)</span>.</p>
+<p>For <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_3\)</span>, the signature columns agree half in the rows (true similarity is 1/4). While the signature of <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_2\)</span> estimate 0 as their Jaccard similarity (same as true value).</p>
+</div>
+</section>
+</section>
+</section>
+<section id="applying-shingling-and-minhashing-on-a-real-world-dataset">
+<h2>Applying Shingling and Minhashing on a Real-World Dataset<a class="headerlink" href="#applying-shingling-and-minhashing-on-a-real-world-dataset" title="Permalink to this headline">#</a></h2>
+<p>Now, let’s put our study into practice by applying shingling and minhashing on a real-world dataset. We will take the <a class="reference external" href="https://scikit-learn.org/stable/datasets/real_world.html#newsgroups-dataset">News Group Dataset</a> in <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> and use <code class="docutils literal notranslate"><span class="pre">dask</span></code> to perform shingling and minhashing.</p>
+<p>We load the dataset using the code below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_20newsgroups</span>
+
+<span class="c1"># Load the news group dataset without the headers, footers and quotes</span>
+<span class="n">newsgroup</span> <span class="o">=</span> <span class="n">fetch_20newsgroups</span><span class="p">(</span>
+    <span class="n">subset</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="n">remove</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;headers&#39;</span><span class="p">,</span> <span class="s1">&#39;footers&#39;</span><span class="p">,</span> <span class="s1">&#39;quotes&#39;</span><span class="p">))</span>
+<span class="n">newsgroup_data</span> <span class="o">=</span> <span class="n">newsgroup</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Afterwards, let’s initialize our dask client.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="kn">import</span> <span class="nn">dask.bag</span> <span class="k">as</span> <span class="nn">db</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We load the newsgroup dataset as a dask bag using the <code class="docutils literal notranslate"><span class="pre">from_sequence()</span></code> function. Note also here that we use the first item in the tuple as an identifier of the text. This enables us to refer to it when we want to compare similar documents. This can also be in the form of filepath for each read documents or hyperlink for scraped urls.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">newsgroup_bag</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">from_sequence</span><span class="p">(</span>
+    <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">newsgroup_data</span><span class="p">)),</span> <span class="n">newsgroup_data</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We define a simple cleaning step by normalizing all the blank space characters into a single space and removing all alpha-numeric characters. We also case normalize the input text for simplicity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+
+
+<span class="k">def</span> <span class="nf">clean_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Clean text by removing non-alphanumeric characters and replacing</span>
+<span class="sd">    all blank space characters into a single space</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\s&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^\w\s]&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">))</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">newsgroup_bag_cleaned</span> <span class="o">=</span> <span class="n">newsgroup_bag</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">clean_text</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then use the <code class="xref py py-class docutils literal notranslate"><span class="pre">MinhashLSH</span></code> from <code class="xref py py-mod docutils literal notranslate"><span class="pre">alis.feature_extraction</span></code> API. This allows us to perform word shingling and extract the minhash signatures by just specifying our desired parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">alis.feature_extraction</span> <span class="kn">import</span> <span class="n">MinhashLSH</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, we take the 3-word shingle and set the size of the hash buckets to be between the range of <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(2^{12}\)</span>. Furthermore, we set the number of hash functions we use for the signatures to be <span class="math notranslate nohighlight">\(10\)</span>, and the hash size to be roughly the same size as the range of the hashed word shingles.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">minhasher</span> <span class="o">=</span> <span class="n">MinhashLSH</span><span class="p">(</span><span class="n">shingle_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">num_shingle_bucket</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">num_hash</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                       <span class="n">hash_size</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then use the <code class="xref py py-meth docutils literal notranslate"><span class="pre">transform()</span></code> method of our <code class="docutils literal notranslate"><span class="pre">minhasher</span></code> to get the minhash signature.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">newsgroup_signatures</span> <span class="o">=</span> <span class="n">minhasher</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">newsgroup_bag_cleaned</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Verify that we get now the minhash signatures of each document in our dask bag. After this, we can proceed to take the Jaccard similarity using the signatures to compare the similarity between each document.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">newsgroup_signatures</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((0, [164, 41, 5, 141, 19, 109, 71, 3, 82, 11]),
+ (1, [285, 41, 15, 141, 230, 16, 8, 3, 89, 35]),
+ (2, [31, 41, 0, 26, 24, 52, 8, 3, 63, 5]),
+ (3, [95, 1238, 1095, 487, 858, 700, 737, 129, 214, 1402]),
+ (4, [94, 293, 145, 266, 484, 208, 134, 66, 136, 10]),
+ (5, [45, 104, 300, 119, 85, 25, 71, 3, 59, 25]),
+ (6, [131, 293, 25, 9, 6, 88, 98, 570, 202, 61]),
+ (7, [128, 41, 0, 31, 6, 40, 17, 3, 42, 3]),
+ (8, [530, 104, 110, 380, 124, 172, 521, 192, 89, 171]),
+ (9, [90, 41, 30, 3, 42, 151, 17, 3, 7, 28]))
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="shingling.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Shingling of Documents</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="introduction-to-lsh.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Locality Sensitive Hashing</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By AIM PhD in DS 2024<br/>
+  
+      &copy; Copyright 2022, AIM PhD in DS 2024.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,813 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Hubs and Authorities &#8212; ALIS: Algorithmic Library for Scalability  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=4fea3ae4a0a4ba949df0a89bbae557cc2ce861ae" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom-style.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"TeX": {"equationNumbers": {"autoNumber": "AMS", "useLabelIds": true}}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Social Network Graphs" href="../social-network-graphs/index.html" />
+    <link rel="prev" title="Topic-Sensitive PageRank" href="topic-sensitive-pagerank.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">ALIS: Algorithmic Library for Scalability  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../installation.html">
+   Installation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../finding-similar-items/index.html">
+   Finding Similar Items
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/set-similarity.html">
+     Set Similarity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/shingling.html">
+     Shingling of Documents
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/minhashing.html">
+     Minhashing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/introduction-to-lsh.html">
+     Locality Sensitive Hashing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/theory-of-lsf.html">
+     Theory of LSF
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/lsh-for-minhash.html">
+     LSH Banding Technique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/the-lsh-class.html">
+     Many-to-Many Document Similarity Task
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/demo-minhash-lsh.html">
+     LSH and Document Similarity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stream-mining/index.html">
+   Stream Mining
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/stream-data-model.html">
+     Stream Data Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/data-stream.html">
+     Sampling Data in a Stream
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/filtering-stream.html">
+     Filtering Streams
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/counting-distinct.html">
+     Counting Distinct Elements in a Stream
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/moments.html">
+     Moments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/counting-ones.html">
+     Counting Ones in a Window
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/common-recent.html">
+     Most Common Recent Elements
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   Link Analysis
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="pagerank.html">
+     PageRank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pagerank-for-large-data.html">
+     PageRank for Large Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pagerank-mapreduce.html">
+     PageRank using MapReduce
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="topic-sensitive-pagerank.html">
+     Topic-Sensitive PageRank
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Hubs and Authorities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../social-network-graphs/index.html">
+   Social Network Graphs
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/social-network-preliminaries.html">
+     What is a Social Network?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/network-measures.html">
+     Network Measures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/community-detection.html">
+     Community Detection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/social-network-analysis-using-graphframes.html">
+     Social Network Analysis using GraphFrames
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  API Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/feature_extraction/index.html">
+   Feature Extraction
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/feature_extraction/shingles.html">
+     Shingles
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/feature_extraction/minhash.html">
+     Minhashing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/similarity/index.html">
+   Similarity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/similarity/minhash_lsh.html">
+     Minhash LSH
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/similarity/jaccard.html">
+     Jaccard Similarity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api-docs/stream_mining/index.html">
+   Stream Mining
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api-docs/link_analysis/index.html">
+   Link Analysis
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/network_tools/index.html">
+   Network Tools
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/clustering.html">
+     Clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/metrics.html">
+     Metrics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/plots.html">
+     Plots
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/link-analysis/hubs-and-authorities.ipynb.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#description-of-hubs-and-authorities">
+   Description of Hubs and Authorities
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-link-matrix">
+   The Link Matrix
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deriving-the-hits-update-rule">
+   Deriving the HITS update rule
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hits-algorithm">
+   HITS Algorithm
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Hubs and Authorities</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#description-of-hubs-and-authorities">
+   Description of Hubs and Authorities
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-link-matrix">
+   The Link Matrix
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deriving-the-hits-update-rule">
+   Deriving the HITS update rule
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hits-algorithm">
+   HITS Algorithm
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="hubs-and-authorities">
+<h1>Hubs and Authorities<a class="headerlink" href="#hubs-and-authorities" title="Permalink to this headline">#</a></h1>
+<p>Another method for analyzing the importance of web pages is <em>Hubs and Authorities</em>, also known as <em>HITS (Hyperlink-Induced Topic Search)</em>, proposed shortly after PageRank was implemented. This section describes how this method is implemented.</p>
+<section id="description-of-hubs-and-authorities">
+<h2>Description of Hubs and Authorities<a class="headerlink" href="#description-of-hubs-and-authorities" title="Permalink to this headline">#</a></h2>
+<p>While PageRank assesses the importance of pages in a somewhat one-directional way (via in-links to pages), the HITS methodology revolve around two notions of importance:</p>
+<ol class="simple">
+<li><p><em>Authorities</em> - Pages are assessed as important because they <em>provide information</em> about a topic.</p></li>
+<li><p><em>Hubs</em> - Pages are assessed as important because they tell <em>where to go</em> to get information about a topic.</p></li>
+</ol>
+<p>Just like PageRank, HITS makes use of links as a way of assessing the importance of pages.</p>
+<p>It does this in a recursive manner:</p>
+<ul class="simple">
+<li><p>A page is a good <strong>hub</strong> if it <strong>links to</strong> good authorities</p></li>
+<li><p>A page is a good <strong>authority</strong> if it is <strong>linked by</strong> good hubs</p></li>
+</ul>
+</section>
+<section id="the-link-matrix">
+<h2>The Link Matrix<a class="headerlink" href="#the-link-matrix" title="Permalink to this headline">#</a></h2>
+<p>The HITS algorithm also makes use of a matrix to compute the score of <em>‘hubbiness’</em> or <em>authority</em> of pages. Let’s assume that these scores are represented by the vectors <span class="math notranslate nohighlight">\(\textbf{h}\)</span> and <span class="math notranslate nohighlight">\(\textbf{a}\)</span>.
+Further assume that <span class="math notranslate nohighlight">\(n\)</span> is the number of pages in the network.</p>
+<p>To compute <span class="math notranslate nohighlight">\(\textbf{h}\)</span> and <span class="math notranslate nohighlight">\(\textbf{a}\)</span>, we need a matrix to contain information about the links.
+For the HITS algorithm, this matrix is called the <em>link matrix</em> <span class="math notranslate nohighlight">\(L\)</span>, of size <span class="math notranslate nohighlight">\(n\)</span> x <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>If we denote the elements of <span class="math notranslate nohighlight">\(L\)</span> as <span class="math notranslate nohighlight">\(\ell_{ij}\)</span>, we have:</p>
+<p><span class="math notranslate nohighlight">\(
+    \ell_{ij}=\left\{
+    \begin{array}{&#64;{}ll&#64;{}}
+    1, &amp; \text{if there is a link from page } i \text{ to } j \\
+    0, &amp; \text{otherwise}
+    \end{array}\right.
+\)</span></p>
+<p>Note that, compared to the Transition Matrix of PageRank, the <em>direction</em> for putting entries in the matrix is reversed, since for the transition matrix, the entries are defined according to links from <strong><span class="math notranslate nohighlight">\(j\)</span> to <span class="math notranslate nohighlight">\(i\)</span></strong>. Aside from the matrix <span class="math notranslate nohighlight">\(L\)</span>, hits also makes use of its transpose, <span class="math notranslate nohighlight">\(L^T\)</span>. Note that <span class="math notranslate nohighlight">\(L^T\)</span> is similar to the transition matrix, only that its entries are <span class="math notranslate nohighlight">\(1\)</span> for instead of <span class="math notranslate nohighlight">\(1/n\)</span> for the non-zero elements.</p>
+<p>Given the earlier discussion on graph notations, we observe that the Link Matrix is actually nothing but the adjacency matrix of the graph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">G4</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+<span class="n">G4</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;C&quot;</span><span class="p">,</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="s2">&quot;E&quot;</span><span class="p">])</span>
+<span class="n">G4</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;C&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;D&quot;</span><span class="p">),</span> 
+    <span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;A&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;D&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span><span class="s2">&quot;E&quot;</span><span class="p">),</span>    
+    <span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="s2">&quot;C&quot;</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>  
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Graph 4. A sample graph for illustrating the HITS algorithm&quot;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G4</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/hubs-and-authorities_9_0.png" src="../_images/hubs-and-authorities_9_0.png" />
+</div>
+</div>
+<p>The link matrix or adjacency matrix of <span class="math notranslate nohighlight">\(G4\)</span> is given by:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">G4</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 1, 1, 1, 0],
+       [1, 0, 0, 1, 0],
+       [0, 0, 0, 0, 1],
+       [0, 1, 1, 0, 0],
+       [0, 0, 0, 0, 0]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="deriving-the-hits-update-rule">
+<h2>Deriving the HITS update rule<a class="headerlink" href="#deriving-the-hits-update-rule" title="Permalink to this headline">#</a></h2>
+<p>Recall in PageRank that the score of a page is distributed to its successors. In the case of HITS, the score passed to the successors. In order to prevent values from growing without bounds, the values are normally scaled so that the largest value of a component is 1.</p>
+<p>Given constants <span class="math notranslate nohighlight">\(\lambda\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span> to represent the scaling factor, we can describe the iteration step for updating <span class="math notranslate nohighlight">\(\textbf{h}\)</span> and <span class="math notranslate nohighlight">\(\textbf{a}\)</span> as follows:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\textbf{h'}  = \lambda L \textbf{a} \)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\textbf{a'}  = \mu L^T \textbf{h} \)</span></p></li>
+</ul>
+<p>Since the hubbiness of a page is proportional to the authority of its <em>successors</em>, and the authority of a page is proportional to the hubbiness of its <em>predecessors</em>, we can actually compute for hubbiness independently, giving us a form that allows us to compute the two values independently.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\textbf{h'}  = \lambda \mu L L^{T} \textbf{a} \)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\textbf{a'}  = \lambda \mu L^T
+L \textbf{h} \)</span></p></li>
+</ul>
+<p>However, since <span class="math notranslate nohighlight">\(L L^{T}\)</span> and <span class="math notranslate nohighlight">\(L^{T} L\)</span> are not sparse, it is actually better to compute  <span class="math notranslate nohighlight">\(\textbf{h}\)</span> and <span class="math notranslate nohighlight">\(\textbf{a}\)</span> recursively. We outline method in the next subsection.</p>
+</section>
+<section id="hits-algorithm">
+<h2>HITS Algorithm<a class="headerlink" href="#hits-algorithm" title="Permalink to this headline">#</a></h2>
+<p>We can summarize the HITS algorithm as follows:</p>
+<p>Initialize <span class="math notranslate nohighlight">\(\textbf{h}\)</span> and <span class="math notranslate nohighlight">\(\textbf{a}\)</span> to a vectors of 1’s (of size <span class="math notranslate nohighlight">\(n\)</span>)</p>
+<p>Iterate:</p>
+<ol class="simple">
+<li><p>Compute <span class="math notranslate nohighlight">\(\textbf{a}  = \mu L^T \textbf{h} \)</span></p></li>
+<li><p>Scale <span class="math notranslate nohighlight">\(\textbf{a}\)</span> so that the largest component is 1 (i.e., divide each element by the maximum value.)</p></li>
+<li><p>Compute <span class="math notranslate nohighlight">\(\textbf{h}  = \mu L^T \textbf{a} \)</span></p></li>
+<li><p>Scale <span class="math notranslate nohighlight">\(\textbf{h}\)</span> so that the largest component is 1</p></li>
+</ol>
+<p>Until changes to <span class="math notranslate nohighlight">\(\textbf{h}\)</span> and <span class="math notranslate nohighlight">\(\textbf{a}\)</span> are sufficiently small.</p>
+<p>We implement the hits algorithm below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hits</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mi">10</span><span class="o">**-</span><span class="mi">6</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute the PageRank of a given Transition Matrix</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    L : numpy array</span>
+<span class="sd">        Link Matrix: Array of shape (n, n), where n is the number of nodes in the network</span>
+<span class="sd">    tol : float</span>
+<span class="sd">        Tolerance: Iteration stops if the distance between previous and updated PageRank vectors </span>
+<span class="sd">        goes below this value</span>
+<span class="sd">    max_iter : integer</span>
+<span class="sd">        Maximum number of iterations</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    h, a : tuple of numpy array</span>
+<span class="sd">        Vectors of size n containing the hub and authority values </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">tol</span> <span class="c1"># initialize to a large number</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">delta</span> <span class="o">&gt;</span> <span class="n">tol</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="c1"># save old values</span>
+        <span class="n">prev_h</span> <span class="o">=</span> <span class="n">h</span>
+        <span class="n">prev_a</span> <span class="o">=</span> <span class="n">a</span>
+
+        <span class="c1"># update a</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>    
+        <span class="c1"># scale a</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+        <span class="c1"># update h</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="c1"># scale h</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+
+        <span class="n">delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="n">prev_h</span><span class="p">)),</span> 
+                <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">prev_a</span><span class="p">))</span>
+                <span class="p">])</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">max_iter</span><span class="p">:</span>
+            <span class="k">break</span>        
+    <span class="k">return</span> <span class="n">h</span><span class="p">,</span> <span class="n">a</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">L</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">G4</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="n">h</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">hits</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;h: </span><span class="si">{</span><span class="n">h</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;a: </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>h: [1.00000000e+00 3.58257838e-01 1.02588408e-11 7.16515005e-01
+ 0.00000000e+00]
+a: [2.08712567e-01 1.00000000e+00 1.00000000e+00 7.91288371e-01
+ 2.86353830e-11]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>EXERCISES</strong></p>
+<ol class="simple">
+<li><p>Identify pages that can be considered as examples of hubs and authorities</p></li>
+<li><p>Calculate the <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(a\)</span> scores for Graph 1 in the previous section.</p></li>
+</ol>
+<p><strong>REFERENCE</strong> <span id="id1">[<a class="reference internal" href="../bibliography.html#id6" title="Jure Leskovec, Anand Rajaraman, and Jeffrey David Ullman. Mining of massive data sets. Cambridge university press, 2020.">LRU20</a>]</span></p>
+</section>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="topic-sensitive-pagerank.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Topic-Sensitive PageRank</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../social-network-graphs/index.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Social Network Graphs</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By AIM PhD in DS 2024<br/>
+  
+      &copy; Copyright 2022, AIM PhD in DS 2024.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

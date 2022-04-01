@@ -1,0 +1,406 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "983ee773",
+   "metadata": {},
+   "source": [
+    "# Shingling of Documents"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8366cae4",
+   "metadata": {},
+   "source": [
+    "In natural language processing, shingling is a set of unique *shingles* or n-grams composing of contiguous subsequences of tokens within a document, which can be used to determine the similarity between documents {cite:ps}`schutze2008introduction`. In this case, the documents that shares pieces of short sentences or phrases will contain many common elements in their representation if the sentences appear in different order in the two documents."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "93b02375",
+   "metadata": {},
+   "source": [
+    "## $k$-shingles"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a4a0817d",
+   "metadata": {},
+   "source": [
+    "The simplest way to do shingling is by enumerating all the $k$-shingles of a particular document. This refers to any substring with length $k$ found in the document (See {numref}`k-shingles`).\n",
+    "\n",
+    "```{figure} ./images/shingles.png\n",
+    ":name: k-shingles\n",
+    ":width: 500px\n",
+    "\n",
+    "5-shingles found from the sentence \"A quick brown fox jumps over the lazy dog\".\n",
+    "```\n",
+    "\n",
+    "Here, notice that the shingles found include the empty space represented as a single character. We have the freedom to perform any preprocessing that we deem important prior to extraction of the shingles. Commonly, we may compress newline characters or tabs as a single space for simplicity."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "9ae8b5fa",
+   "metadata": {},
+   "source": [
+    "### Example 1"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a4bbf02c",
+   "metadata": {},
+   "source": [
+    "Suppose that in a document $D$ contains a substring `ilovedove`. Pick the $2$-shingles of $D$ by performing the $k$-shingling extraction algorithm.\n",
+    "\n",
+    "\n",
+    "#### Solution\n",
+    "\n",
+    "```{toggle}\n",
+    "Picking the $2$-shingles of $D$, we will get:\n",
+    "\n",
+    "`{il, lo, ov, ve, ed, do}`\n",
+    "\n",
+    "Notice that although substrings `ov` and `ve` appears twice, it only appears once as a shingle. Another variant of doing shingling is to construct a *bag of shingles* where each shingle would appear in the result as many times as it appears in the document.\n",
+    "```"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "92ab7a04",
+   "metadata": {},
+   "source": [
+    "### Choosing the Shingle Size"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "0998fb97",
+   "metadata": {},
+   "source": [
+    "Choosing the $k$ depends on the typical length of documents and how large the set of typical character is. Usually for corpus of documents containing emails, $k = 5$ is a good choice. For larger documents, e.g. research articles, the choice of $k = 9$ is workable.\n",
+    "\n",
+    "To imagine the effect of the chosen $k$ in shignling is to imagine how many possibilities the choice $k$ creates. For example, in the English alphabet, there are only 26 $\\sim$ 20 characters, thus for a given $k$-shingles, there would be an estimate number of $20^k$ shingles. For our email example, this would correspond to $20^5 = 3,200,000$ possible shingles. Most emails are typically shorter than 3.2 million characters, as such, $k = 5$ is a workable value for such assplications."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "b57eb07f",
+   "metadata": {},
+   "source": [
+    "### Extracting the $k$-shingles"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "3bef2c58",
+   "metadata": {},
+   "source": [
+    "```{eval-rst}\n",
+    "We can use the function :py:func:`~alis.feature_extraction.k_shingles` from the :py:mod:`alis.feature_extraction` library to extract k-shingles from any given text.\n",
+    "```"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "c923d5f3",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-03-28T14:52:47.747322Z",
+     "start_time": "2022-03-28T14:52:44.012997Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "from alis.feature_extraction import k_shingles"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "7f03b15f",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-03-28T14:52:47.758708Z",
+     "start_time": "2022-03-28T14:52:47.751804Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "input_text = 'The quick brown fox jumps over the lazy dog'\n",
+    "shingles = k_shingles(input_text, 5) # Extract 5-shingles of the input text"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "972dd70f",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-03-28T14:52:47.764463Z",
+     "start_time": "2022-03-28T14:52:47.761196Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[' brow', ' fox ', ' jump', ' lazy', ' over', ' quic', ' the ', 'The q', 'azy d', 'brown', 'ck br', 'e laz', 'e qui', 'er th', 'fox j', 'he la', 'he qu', 'ick b', 'jumps', 'k bro', 'lazy ', 'mps o', 'n fox', 'over ', 'own f', 'ox ju', 'ps ov', 'quick', 'r the', 'rown ', 's ove', 'the l', 'uick ', 'umps ', 'ver t', 'wn fo', 'x jum', 'y dog', 'zy do']\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(sorted(shingles))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8856c42f",
+   "metadata": {},
+   "source": [
+    "Notice that from the above example and the exercise that we discussed a while ago, the number of shingles would be insurmountable even for a moderate size of collection of documents. As such, instead of using substrings directly as shingles, we may pick a hash function that maps the shingles to some number of buckets that treat the resulting bucket number as a shingle."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "6881d49e",
+   "metadata": {},
+   "source": [
+    "```{eval-rst}\n",
+    "We can do this via the :py:func:`~alis.feature_extraction.hashed_shingles` feature extractor from the :py:mod:`alis.feature_extraction` library.\n",
+    "```"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "cac4896e",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-03-28T14:52:47.771398Z",
+     "start_time": "2022-03-28T14:52:47.768025Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "from alis.feature_extraction import hashed_shingles"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "58b3cac8",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-03-28T14:52:47.778679Z",
+     "start_time": "2022-03-28T14:52:47.774194Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "{1, 643, 259, 262, 8, 651, 780, 531, 659, 19, 147, 158, 802, 932, 808, 427, 817, 51, 565, 311, 317, 450, 708, 838, 588, 849, 466, 83, 86, 857, 350, 226, 483, 360, 1002, 1004, 497, 245, 254}\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(hashed_shingles(input_text, k=5, n=10))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c32eecaf",
+   "metadata": {},
+   "source": [
+    "Here, `k` denotes the $k$-shingle, and `n` represents the resulting bucket size $2^n - 1$. The larger our choice for $n$, the larger the storage requirement, but lesser collisions will be experienced."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "9764d32f",
+   "metadata": {},
+   "source": [
+    "## Shingles Build from Words"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "82580d1e",
+   "metadata": {},
+   "source": [
+    "Another way to define shingles is to exploit some property in the document that allows us to focus an interesting property of the document. For instance, we can define a shingle to be a stop word followed by the next two words, regardless of whether they were stop words or not. This not only reduces the storage space required for us to store a given particular document, but allows us to focus on the important parts of the document.\n",
+    "\n",
+    "This allows us for example to distinguish important parts of news articles as compared to let's say those that appear as an advertisement in a web page. This biases the set of shingles extracted in favor of the article and differentiates it with the surrounding material, which make our Jaccard similarity operation perform better and focus on the article itself rather than some advertisement or surrounding material."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d5e663a5",
+   "metadata": {},
+   "source": [
+    "```{eval-rst}\n",
+    "We can extract the word shingles from a given string of text using the :py:func:`~alis.feature_extraction.word_shingles` and :py:func:`~alis.feature_extraction.hashed_word_shingles` from the :py:mod:`alis.feature_extraction` library. Here, we may optionally input a collection of ``stop_words``. We then define a shingle to be a stop word followed by the next ``k-1`` words regardless of whether the next words were stop words or not.\n",
+    "```"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "4f20a275",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-03-28T14:52:47.783550Z",
+     "start_time": "2022-03-28T14:52:47.780900Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "from alis.feature_extraction import word_shingles, hashed_word_shingles"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "1725b9c4",
+   "metadata": {},
+   "source": [
+    "`word_shingles` extracts the next `k-1` words given that the first word encountered is a stop word."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "7df00625",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-03-28T14:53:59.322160Z",
+     "start_time": "2022-03-28T14:53:59.318936Z"
+    },
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "{'over the lazy', 'the lazy dog', 'the quick brown'}\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(word_shingles(input_text.lower(), 3, stop_words=None))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d406fe33",
+   "metadata": {},
+   "source": [
+    "We may use `hashed_word_shingles` to extract the shingles in hashed representation form."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "7a0f4500",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-03-28T14:54:40.758235Z",
+     "start_time": "2022-03-28T14:54:40.754985Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "{1785721545, 2800494314, 331608684}\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(hashed_word_shingles(input_text.lower(), 3, 32, stop_words=None))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7b8d39ed",
+   "metadata": {},
+   "source": [
+    "## Exercises"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "08c6a82c",
+   "metadata": {},
+   "source": [
+    "For the exercises, let's consider an excerpt from Pablo Neruda's poem <a href=\"https://www.poemhunter.com/poem/i-do-not-love-you-except-because-i-love-you/\" target=\"_blank\"><i>I Do Not Love You Except Because I Love You</i></a>\n",
+    "\n",
+    "    I do not love you except because I love you;\n",
+    "    I go from loving to not loving you,\n",
+    "    From waiting to not waiting for you\n",
+    "    My heart moves from cold to fire."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "da2a94d3",
+   "metadata": {},
+   "source": [
+    "### Exercise 1"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "9269db67",
+   "metadata": {},
+   "source": [
+    "Treat each newline character as a single space, then extract the $5$-shingle of this excerpt. Compute for both the non-hashed and hashed shingle representation of the excerpt."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "54a3b3cb",
+   "metadata": {},
+   "source": [
+    "### Exercise 2"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "e203a69b",
+   "metadata": {},
+   "source": [
+    "Perform a preprocessing step of case normalization and removal of special characters then scan each line in the poem separately. Extract the $3$-word shingle of this excerpt. Solve for both the non-hashed and hashed word shingle representation of the excerpt."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.12"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

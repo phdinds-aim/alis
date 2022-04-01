@@ -1,0 +1,1172 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Community Detection &#8212; ALIS: Algorithmic Library for Scalability  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=4fea3ae4a0a4ba949df0a89bbae557cc2ce861ae" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom-style.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"TeX": {"equationNumbers": {"autoNumber": "AMS", "useLabelIds": true}}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Social Network Analysis using GraphFrames" href="social-network-analysis-using-graphframes.html" />
+    <link rel="prev" title="Network Measures" href="network-measures.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">ALIS: Algorithmic Library for Scalability  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../installation.html">
+   Installation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../finding-similar-items/index.html">
+   Finding Similar Items
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/set-similarity.html">
+     Set Similarity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/shingling.html">
+     Shingling of Documents
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/minhashing.html">
+     Minhashing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/introduction-to-lsh.html">
+     Locality Sensitive Hashing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/theory-of-lsf.html">
+     Theory of LSF
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/lsh-for-minhash.html">
+     LSH Banding Technique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/the-lsh-class.html">
+     Many-to-Many Document Similarity Task
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/demo-minhash-lsh.html">
+     LSH and Document Similarity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stream-mining/index.html">
+   Stream Mining
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/stream-data-model.html">
+     Stream Data Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/data-stream.html">
+     Sampling Data in a Stream
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/filtering-stream.html">
+     Filtering Streams
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/counting-distinct.html">
+     Counting Distinct Elements in a Stream
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/moments.html">
+     Moments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/counting-ones.html">
+     Counting Ones in a Window
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/common-recent.html">
+     Most Common Recent Elements
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../link-analysis/index.html">
+   Link Analysis
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/pagerank.html">
+     PageRank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/pagerank-for-large-data.html">
+     PageRank for Large Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/pagerank-mapreduce.html">
+     PageRank using MapReduce
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/topic-sensitive-pagerank.html">
+     Topic-Sensitive PageRank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../link-analysis/hubs-and-authorities.html">
+     Hubs and Authorities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   Social Network Graphs
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="social-network-preliminaries.html">
+     What is a Social Network?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="network-measures.html">
+     Network Measures
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Community Detection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="social-network-analysis-using-graphframes.html">
+     Social Network Analysis using GraphFrames
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  API Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/feature_extraction/index.html">
+   Feature Extraction
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/feature_extraction/shingles.html">
+     Shingles
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/feature_extraction/minhash.html">
+     Minhashing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/similarity/index.html">
+   Similarity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/similarity/minhash_lsh.html">
+     Minhash LSH
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/similarity/jaccard.html">
+     Jaccard Similarity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api-docs/stream_mining/index.html">
+   Stream Mining
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api-docs/link_analysis/index.html">
+   Link Analysis
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/network_tools/index.html">
+   Network Tools
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/clustering.html">
+     Clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/metrics.html">
+     Metrics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/plots.html">
+     Plots
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/social-network-graphs/community-detection.ipynb.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#applying-standard-clustering-methods">
+   Applying Standard Clustering Methods
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-1">
+     Example 1
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#limitations">
+       Limitations
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#girvan-newman-algorithm">
+   Girvan-Newman Algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-2">
+     Example 2
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Limitations
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#direct-discovery-of-communities">
+   Direct Discovery of Communities
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finding-cliques">
+     Finding Cliques
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-3">
+     Example 3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#partitioning-of-graphs">
+   Partitioning of Graphs
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normalized-cut">
+     Normalized Cut
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-4">
+     Example 4
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spectral-methods">
+     Spectral Methods
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-5">
+     Example 5
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-overlapping-communities">
+   Finding Overlapping Communities
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise">
+   Exercise
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Community Detection</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#applying-standard-clustering-methods">
+   Applying Standard Clustering Methods
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-1">
+     Example 1
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#limitations">
+       Limitations
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#girvan-newman-algorithm">
+   Girvan-Newman Algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-2">
+     Example 2
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Limitations
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#direct-discovery-of-communities">
+   Direct Discovery of Communities
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finding-cliques">
+     Finding Cliques
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-3">
+     Example 3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#partitioning-of-graphs">
+   Partitioning of Graphs
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normalized-cut">
+     Normalized Cut
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-4">
+     Example 4
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spectral-methods">
+     Spectral Methods
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-5">
+     Example 5
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-overlapping-communities">
+   Finding Overlapping Communities
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise">
+   Exercise
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="community-detection">
+<h1>Community Detection<a class="headerlink" href="#community-detection" title="Permalink to this headline">#</a></h1>
+<p>Communities, alternatively referred to as clusters or modules, are groups of vertices that most likely share similar attributes and/or perform similar functions in the graph. These are tightly connected clusters of nodes that are only loosely connected to other clusters. In this chapter, we will discuss different clustering and community detection techniques.</p>
+<section id="applying-standard-clustering-methods">
+<h2>Applying Standard Clustering Methods<a class="headerlink" href="#applying-standard-clustering-methods" title="Permalink to this headline">#</a></h2>
+<p><strong>Hierarchical (agglomerative) clustering</strong> of a social-network graph starts by combining some two nodes that are connected by an edge. Successively, edges that are not between two nodes of the same cluster would be chosen randomly to combine the clusters to which their two nodes belong. The choices would be random, because all distances represented by an edge are the same.</p>
+<p>In <strong>k-means (point assignment) approach</strong> we will pick  k starting nodes at random. Then assign each node to the cluster with the shortest average distance to all the nodes of the cluster. If we pick two starting nodes at random, they might both be in the same cluster. We can start with one randomly chosen node and then pick another as far away as
+possible, or we could pick any pair of nodes not connected by an edge.</p>
+<p>To illustrate these clustering methods, we will use a benchmark network, the karate club graph.</p>
+<section id="example-1">
+<h3>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">cluster</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.cluster</span> <span class="kn">import</span> <span class="n">adjusted_rand_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.cluster</span> <span class="kn">import</span> <span class="n">normalized_mutual_info_score</span>
+
+<span class="kn">from</span> <span class="nn">alis.network_tools.plots</span> <span class="kn">import</span> <span class="n">graph_to_edge_matrix</span><span class="p">,</span> <span class="n">draw_communities</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">karate_club_graph</span><span class="p">()</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, we convert the graph to its adjacency matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">edge_mat</span> <span class="o">=</span> <span class="n">graph_to_edge_matrix</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">edge_mat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 1, 1, ..., 1, 0, 0],
+       [1, 0, 1, ..., 0, 0, 0],
+       [1, 1, 0, ..., 0, 1, 0],
+       ...,
+       [1, 0, 0, ..., 0, 1, 1],
+       [0, 0, 1, ..., 1, 0, 1],
+       [0, 0, 0, ..., 1, 1, 0]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We determine the cluster labels of each node through k-means and agglomerative  clustering techniques.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k_clusters</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">algorithms</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">algorithms</span><span class="p">[</span><span class="s1">&#39;agglom&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">AgglomerativeClustering</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">k_clusters</span><span class="p">,</span> <span class="n">linkage</span><span class="o">=</span><span class="s2">&quot;ward&quot;</span><span class="p">)</span>
+<span class="n">algorithms</span><span class="p">[</span><span class="s1">&#39;kmeans&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">k_clusters</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">algorithms</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">edge_mat</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">labels_</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nmi_results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">ars_results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># True labels of the group each student (node) unded up in. Found via the original paper</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">y_true_val</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
+
+<span class="c1"># Append the results into lists</span>
+<span class="k">for</span> <span class="n">y_pred</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="n">nmi_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">normalized_mutual_info_score</span><span class="p">(</span><span class="n">y_true_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+    <span class="n">ars_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y_true_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To visualize the result, we show here the detected communities.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_communities</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">algorithms</span><span class="p">[</span><span class="s1">&#39;agglom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="n">pos</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>*c* argument looks like a single numeric RGB or RGBA sequence, which should be avoided as value-mapping will have precedence in case its length matches with *x* &amp; *y*.  Please use the *color* keyword-argument or provide a 2D array with a single row if you intend to specify the same RGB or RGBA value for all points.
+*c* argument looks like a single numeric RGB or RGBA sequence, which should be avoided as value-mapping will have precedence in case its length matches with *x* &amp; *y*.  Please use the *color* keyword-argument or provide a 2D array with a single row if you intend to specify the same RGB or RGBA value for all points.
+</pre></div>
+</div>
+<img alt="../_images/community-detection_10_1.png" src="../_images/community-detection_10_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_communities</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">algorithms</span><span class="p">[</span><span class="s1">&#39;kmeans&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>*c* argument looks like a single numeric RGB or RGBA sequence, which should be avoided as value-mapping will have precedence in case its length matches with *x* &amp; *y*.  Please use the *color* keyword-argument or provide a 2D array with a single row if you intend to specify the same RGB or RGBA value for all points.
+*c* argument looks like a single numeric RGB or RGBA sequence, which should be avoided as value-mapping will have precedence in case its length matches with *x* &amp; *y*.  Please use the *color* keyword-argument or provide a 2D array with a single row if you intend to specify the same RGB or RGBA value for all points.
+</pre></div>
+</div>
+<img alt="../_images/community-detection_11_1.png" src="../_images/community-detection_11_1.png" />
+</div>
+</div>
+<section id="limitations">
+<h4>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">#</a></h4>
+<ol class="simple">
+<li><p>The number of clusters/ communities should be known beforehand.</p></li>
+<li><p>The time complexity of a naive agglomerative clustering is <span class="math notranslate nohighlight">\(\mathcal {O}(n^{3})\)</span> because we exhaustively scan the <span class="math notranslate nohighlight">\(N x N\)</span> matrix dist_mat for the lowest distance in each of <span class="math notranslate nohighlight">\(N-1\)</span> iterations. Using priority queue data structure we can reduce this complexity to <span class="math notranslate nohighlight">\(\mathcal {O}(n^{2}\log{n})\)</span>. By using some more optimizations it can be brought down to <span class="math notranslate nohighlight">\(\mathcal {O}(n^{2})\)</span>. For k-means, the average complexity is given by O(k n T), where n is the number of samples and T is the number of iteration.</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="girvan-newman-algorithm">
+<h2>Girvan-Newman Algorithm<a class="headerlink" href="#girvan-newman-algorithm" title="Permalink to this headline">#</a></h2>
+<p>The Girvan–Newman algorithm identifies communities by gradually removing edges from the original network. The communities are the connected components of the network. The Girvan–Newman algorithm focuses on the fact that the edge with the highest betweenness centrality are more probable to be “between” communities.</p>
+<p>The Girvan-Newman Algorithm is as follows:</p>
+<ol class="simple">
+<li><p>Calculate the betweenness for all edges in the network.</p></li>
+<li><p>Remove the edge with the highest betweeness.</p></li>
+<li><p>Recalculate betweeness for all edges affected by the removal.</p></li>
+<li><p>Repeat from step 2 until the desired number of clusters was obtained.</p></li>
+</ol>
+<p>We will again use the karate club graph for this example.</p>
+<section id="example-2">
+<h3>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">networkx.algorithms.community</span> <span class="kn">import</span> <span class="n">girvan_newman</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+
+<span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">com</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">comp</span> <span class="o">=</span> <span class="n">girvan_newman</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">communities</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">islice</span><span class="p">(</span><span class="n">comp</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">com</span> <span class="o">=</span> <span class="n">communities</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">communities</span><span class="p">))</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([0, 1, 3, 4, 5, 6, 7, 10, 11, 12, 13, 16, 17, 19, 21], [2, 8, 9, 14, 15, 18, 20, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33])
+([0, 1, 3, 4, 5, 6, 7, 10, 11, 12, 13, 16, 17, 19, 21], [2, 8, 14, 15, 18, 20, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33], [9])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The output of the Girvan-Newman are the list nodes belonging to each cluster. We can also visualize the result below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># True labels of the group each student (node) unded up in. Found via the original paper</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">())</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">com</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">y_pred</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">com</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">y_pred</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            
+<span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">draw_communities</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>*c* argument looks like a single numeric RGB or RGBA sequence, which should be avoided as value-mapping will have precedence in case its length matches with *x* &amp; *y*.  Please use the *color* keyword-argument or provide a 2D array with a single row if you intend to specify the same RGB or RGBA value for all points.
+*c* argument looks like a single numeric RGB or RGBA sequence, which should be avoided as value-mapping will have precedence in case its length matches with *x* &amp; *y*.  Please use the *color* keyword-argument or provide a 2D array with a single row if you intend to specify the same RGB or RGBA value for all points.
+</pre></div>
+</div>
+<img alt="../_images/community-detection_17_1.png" src="../_images/community-detection_17_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dif</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y_pred</span><span class="o">-</span><span class="n">y_true</span><span class="p">))</span>
+<span class="n">dif</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that two nodes at the boundary of the communities were incorrectly labeled.</p>
+<section id="id1">
+<h4>Limitations<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h4>
+<ol class="simple">
+<li><p>Time to calculate the betweenness for all m edges in a graph of n nodes is <span class="math notranslate nohighlight">\(\mathcal {O}(mn)\)</span>. Since this calculation has to be repeated once for the removal of each edge, the entire algorithm runs in worst-case time <span class="math notranslate nohighlight">\(\mathcal {O}(m^{2}n)\)</span>.</p></li>
+<li><p>Cannot place individuals in two different communities.</p></li>
+<li><p>Everyone is assigned to a community.</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="direct-discovery-of-communities">
+<h2>Direct Discovery of Communities<a class="headerlink" href="#direct-discovery-of-communities" title="Permalink to this headline">#</a></h2>
+<p>In this section, we shall discuss a technique for discovering communities directly by looking for subsets of the nodes that have a relatively large number of edges among them. Interestingly, the technique for doing this search on a large graph involves finding large frequent itemsets.</p>
+<section id="finding-cliques">
+<h3>Finding Cliques<a class="headerlink" href="#finding-cliques" title="Permalink to this headline">#</a></h3>
+<p>We could find sets of nodes with many edges between them by finding a large clique (a set of nodes with edges between any two of them). However, that task is not easy. Finding the largest clique in a graph is NP-complete problem, so most of these algorithms have an exponential running time.</p>
+</section>
+<section id="example-3">
+<h3>Example 3<a class="headerlink" href="#example-3" title="Permalink to this headline">#</a></h3>
+<p>The code below lists all cliques in the given graph. Shown in <a class="reference internal" href="#cliques"><span class="std std-numref">Fig. 19</span></a> are some of the detected cliques by the algorithm.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cliques</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">clique</span><span class="o">.</span><span class="n">find_cliques</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">cliques</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0, 1, 17], [0, 1, 2, 3, 13], [0, 1, 2, 3, 7], [0, 1, 19], [0, 1, 21], [0, 4, 10], [0, 4, 6], [0, 5, 10], [0, 5, 6], [0, 8, 2], [0, 11], [0, 12, 3], [0, 31], [1, 30], [2, 32, 8], [2, 9], [2, 27], [2, 28], [5, 16, 6], [33, 32, 8, 30], [33, 32, 14], [33, 32, 15], [33, 32, 18], [33, 32, 20], [33, 32, 22], [33, 32, 23, 29], [33, 32, 31], [33, 9], [33, 13], [33, 19], [33, 26, 29], [33, 27, 23], [33, 28, 31], [24, 25, 31], [24, 27], [25, 23]]
+</pre></div>
+</div>
+</div>
+</div>
+<figure class="align-default" id="cliques">
+<a class="reference internal image-reference" href="../_images/cliques.png"><img alt="../_images/cliques.png" src="../_images/cliques.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Sample cliques in the karate club graph</span><a class="headerlink" href="#cliques" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="partitioning-of-graphs">
+<h2>Partitioning of Graphs<a class="headerlink" href="#partitioning-of-graphs" title="Permalink to this headline">#</a></h2>
+<p>In this section, we examine another approach to organizing social-network graphs. We use some important tools from matrix theory (“spectral methods”) to formulate the problem of partitioning a graph to minimize the number of edges that connect different components.</p>
+<section id="normalized-cut">
+<h3>Normalized Cut<a class="headerlink" href="#normalized-cut" title="Permalink to this headline">#</a></h3>
+<p>Given a graph, we would like to divide the nodes into two sets so that the cut, or set of edges that connect nodes in different sets is minimized. However, we also want to constrain the selection of the cut so that the two sets are approximatelyequal in size.</p>
+<figure class="align-default" id="normcut">
+<a class="reference internal image-reference" href="../_images/normcut.png"><img alt="../_images/normcut.png" src="../_images/normcut.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 20 </span><span class="caption-text">What is a “good” cut?</span><a class="headerlink" href="#normcut" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>A proper definition of a “good” cut must balance the size of the cut itself against the difference in the sizes of the sets that the cut creates. One choice that serves well is the “normalized cut.” First, define the volume of a set S of nodes, denoted <span class="math notranslate nohighlight">\(Vol(S)\)</span>, to be the number of edges with at least one end in S. Suppose we partition the nodes of a graph into two disjoint sets S and T . Let <span class="math notranslate nohighlight">\(Cut(S, T)\)</span> be the number of edges that connect a node in S to a node in T.
+Then the normalized cut value for S and T is</p>
+<center> $\frac{Cut(S,T)}{Vol(S)}+\frac{Cut(S,T)}{Vol(T)}$ </center>
+<p>A small value of normalized cut signifies a “good” partition.</p>
+</section>
+<section id="example-4">
+<h3>Example 4<a class="headerlink" href="#example-4" title="Permalink to this headline">#</a></h3>
+<p>Consider <a class="reference internal" href="#normcut"><span class="std std-numref">Fig. 20</span></a>.If we choose the smallest cut, S = {b} and T = {a, c, d, e, f, g}, this will give us <span class="math notranslate nohighlight">\(Cut(S, T)\)</span> = 1 and <span class="math notranslate nohighlight">\(Vol(S)\)</span> = 1 because there is only one edge connected to b. <span class="math notranslate nohighlight">\(Vol(T)\)</span> = 9 because all of the edges have at least one end at a node of set T. The normalized cut for this partition is 1/1 + 1/9 = 1.11.</p>
+<p>For the preferred cut which consist of the edges (a,d) and (c,f), S = {a, b, c} and T = {d, e, f, g}. <span class="math notranslate nohighlight">\(Cut(S, T)\)</span> = 2, <span class="math notranslate nohighlight">\(Vol(S)\)</span> = 4  and <span class="math notranslate nohighlight">\(Vol(T)\)</span> = 7. Then, the normalized cut is 2/4 + 2/7 = 0.79.</p>
+</section>
+<section id="spectral-methods">
+<h3>Spectral Methods<a class="headerlink" href="#spectral-methods" title="Permalink to this headline">#</a></h3>
+<p>We can get a good idea of the best way to partition a graph from the eigenvalues and eigenvectors of its Laplacian matrix. The Laplacian L has several advantageous mathematical features. L is symmetric and contains only elements with real values. As a result, it possesses real eigenvalues and orthogonal eigenvectors with real entries. Additionally, L is positive semidefinite, which means that its eigenvalues are not negative. The second eigenvalue is denoted by the Fiedler value, and the associated vector is denoted by the Fiedler vector. These contain information on the graph’s topology. The Fiedler value approximates the smallest graph cut necessary to partition the graph into two connected components. Here, nodes are classified into two clusters based on whether their associated Fiedler vector entry is greater than or less than the specified threshold r. Thus, the value of r has an effect on the quality of clusters. 0 and the median value of the Fiedler vector are often used values for r. Each value in the Fiedler vector denotes which side of the cut the node is located on.</p>
+</section>
+<section id="example-5">
+<h3>Example 5<a class="headerlink" href="#example-5" title="Permalink to this headline">#</a></h3>
+<p>Here, we again use the adjacency matrix of the karate club graph. We also determine the degree matrix, which is just the diagonal of the edge matrix. Then, we calculate the Laplacian matrix which is the difference of the degree and the adjacency matrix. Next, determine the eigenvalues and eigenvectors of the Laplacian matrix.
+In the given example below, the negative eigenvectors correspond to cluster 0 and the positive values correspond to cluster 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adjacency matrix</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">edge_mat</span>
+
+<span class="c1"># Degree matrix</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Laplacian matrix</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">D</span><span class="o">-</span><span class="n">A</span>
+
+<span class="c1"># find eigenvalues and eigenvectors</span>
+<span class="n">vals</span><span class="p">,</span> <span class="n">vecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+
+<span class="n">vecs</span> <span class="o">=</span> <span class="n">vecs</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">vals</span><span class="p">)]</span>
+<span class="n">vals</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">vals</span><span class="p">)]</span>
+
+<span class="n">clus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vecs</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vecs</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])):</span>
+    <span class="k">if</span> <span class="n">vecs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">clus</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">clus</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="n">vecs</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">clus</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0.11213743  0.04128789 -0.02321896  0.05549978  0.28460453  0.32372722
+  0.32372722  0.052586   -0.05160128 -0.09280089  0.28460453  0.21099295
+  0.1094613   0.01474197 -0.16275078 -0.16275078  0.42276533  0.10018142
+ -0.16275078  0.01363713 -0.16275078  0.10018142 -0.16275078 -0.15569457
+ -0.15302558 -0.16096292 -0.18710956 -0.12766405 -0.0951523  -0.16765031
+ -0.07349964 -0.09875343 -0.13034546 -0.11890326]
+[1. 1. 0. 1. 1. 1. 1. 1. 0. 0. 1. 1. 1. 1. 0. 0. 1. 1. 0. 1. 0. 1. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="finding-overlapping-communities">
+<h2>Finding Overlapping Communities<a class="headerlink" href="#finding-overlapping-communities" title="Permalink to this headline">#</a></h2>
+<p>In social networks, it is possible that one person is a member of two or more communities. In this section, we will discuss an algorithm on finding overlapping communities. Given a social graph, we expect edges to be denser in the intersection of communities as illustrated in <a class="reference internal" href="#club"><span class="std std-numref">Fig. 21</span></a>.</p>
+<figure class="align-default" id="club">
+<a class="reference internal image-reference" href="../_images/club.png"><img alt="../_images/club.png" src="../_images/club.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text">The overlap of two communities is denser than the nonoverlapping parts of these communities.</span><a class="headerlink" href="#club" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>One algorithm on finding overlapping communities take advantage of this information. Here, the nodes are ordered according to some criterion, for example decreasing Page Rank, and then processed sequentially according to this ordering. A node is added to any cluster if adding it improves the cluster density. If the node is not added to any cluster, it creates a new cluster. Note that every node is in at least one cluster. Clusters that are too small to be relevant to the particular application can be dropped. <span id="id2">[<a class="reference internal" href="../bibliography.html#id7" title="Jeffrey Baumes, Mark Goldberg, and Malik Magdon-Ismail. Efficient identification of overlapping communities. In International Conference on Intelligence and Security Informatics, 27–36. Springer, 2005.">BGMI05</a>]</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">alis.network_tools.clustering</span> <span class="kn">import</span> <span class="n">LA</span><span class="p">,</span> <span class="n">IS2</span>
+
+<span class="n">clust</span> <span class="o">=</span> <span class="n">LA</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">final_clusters</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Run the second part of algorithm</span>
+<span class="k">for</span> <span class="n">clustr</span> <span class="ow">in</span> <span class="n">clust</span><span class="p">:</span>
+    <span class="n">final_clusters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">IS2</span><span class="p">(</span><span class="n">clustr</span><span class="p">,</span> <span class="n">G</span><span class="p">))</span>
+    <span class="c1"># Remove duplicate cluster</span>
+<span class="n">final_without_duplicates</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">fc</span> <span class="ow">in</span> <span class="n">final_clusters</span><span class="p">:</span>
+    <span class="n">fc</span> <span class="o">=</span> <span class="nb">sorted</span> <span class="p">(</span><span class="n">fc</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">fc</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">final_without_duplicates</span><span class="p">:</span>
+        <span class="n">final_without_duplicates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">final_without_duplicates</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0, 1, 2, 3, 7, 8, 13, 19, 23, 27, 28, 29, 30, 31, 32, 33],
+ [0, 1, 2, 3, 7, 13],
+ [0, 4, 5, 6, 10, 16],
+ [0, 1, 2, 3, 7, 8, 13, 19, 23, 24, 25, 27, 28, 29, 30, 31, 32, 33],
+ [0, 1, 2, 3, 7, 8, 13, 19, 28, 30, 31, 32, 33]]
+</pre></div>
+</div>
+</div>
+</div>
+<p><a class="reference internal" href="#overlapcom"><span class="std std-numref">Fig. 22</span></a> shows some of the overlapping communities detected.</p>
+<figure class="align-default" id="overlapcom">
+<a class="reference internal image-reference" href="../_images/overlapcom.png"><img alt="../_images/overlapcom.png" src="../_images/overlapcom.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Sample overlapping communities in the karate club graph</span><a class="headerlink" href="#overlapcom" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
+<p>We discussed different methods on community detection in social network graphs. Standard clustering methods, such as hierarchical (agglomerative) and point assignment (k-means) approaches, for community detection were then explored. Direct discovery of communities through finding cliques, partitioning of graphs through spectral methods and finding overlapping communities were also discussed. The methods presented here may be applied not just to social networks but to other kind of networks as well, such as biological, technological and ecological networks.</p>
+</section>
+<section id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h2>
+<figure class="align-default" id="exercise3">
+<a class="reference internal image-reference" href="../_images/exercise3.png"><img alt="../_images/exercise3.png" src="../_images/exercise3.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 23 </span><span class="caption-text">Sample graph</span><a class="headerlink" href="#exercise3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<ol class="simple">
+<li><p>Determine the “best” cut for the given graph in <a class="reference internal" href="#exercise3"><span class="std std-numref">Fig. 23</span></a> by calculating the normalized cut.</p></li>
+<li><p>Apply partitioning by spectral analysis to the graph in <a class="reference internal" href="#exercise3"><span class="std std-numref">Fig. 23</span></a>. Determine the adjacency matrix, Laplacian matrix, the second eigenvector and cluster labels.</p></li>
+</ol>
+</section>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="network-measures.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Network Measures</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="social-network-analysis-using-graphframes.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Social Network Analysis using GraphFrames</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By AIM PhD in DS 2024<br/>
+  
+      &copy; Copyright 2022, AIM PhD in DS 2024.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

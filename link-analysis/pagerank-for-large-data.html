@@ -1,0 +1,819 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>PageRank for Large Data &#8212; ALIS: Algorithmic Library for Scalability  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=4fea3ae4a0a4ba949df0a89bbae557cc2ce861ae" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom-style.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"TeX": {"equationNumbers": {"autoNumber": "AMS", "useLabelIds": true}}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PageRank using MapReduce" href="pagerank-mapreduce.html" />
+    <link rel="prev" title="PageRank" href="pagerank.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">ALIS: Algorithmic Library for Scalability  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../installation.html">
+   Installation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../finding-similar-items/index.html">
+   Finding Similar Items
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/set-similarity.html">
+     Set Similarity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/shingling.html">
+     Shingling of Documents
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/minhashing.html">
+     Minhashing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/introduction-to-lsh.html">
+     Locality Sensitive Hashing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/theory-of-lsf.html">
+     Theory of LSF
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/lsh-for-minhash.html">
+     LSH Banding Technique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/the-lsh-class.html">
+     Many-to-Many Document Similarity Task
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../finding-similar-items/demo-minhash-lsh.html">
+     LSH and Document Similarity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stream-mining/index.html">
+   Stream Mining
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/stream-data-model.html">
+     Stream Data Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/data-stream.html">
+     Sampling Data in a Stream
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/filtering-stream.html">
+     Filtering Streams
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/counting-distinct.html">
+     Counting Distinct Elements in a Stream
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/moments.html">
+     Moments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/counting-ones.html">
+     Counting Ones in a Window
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream-mining/common-recent.html">
+     Most Common Recent Elements
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   Link Analysis
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="pagerank.html">
+     PageRank
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     PageRank for Large Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pagerank-mapreduce.html">
+     PageRank using MapReduce
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="topic-sensitive-pagerank.html">
+     Topic-Sensitive PageRank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hubs-and-authorities.html">
+     Hubs and Authorities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../social-network-graphs/index.html">
+   Social Network Graphs
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/social-network-preliminaries.html">
+     What is a Social Network?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/network-measures.html">
+     Network Measures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/community-detection.html">
+     Community Detection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../social-network-graphs/social-network-analysis-using-graphframes.html">
+     Social Network Analysis using GraphFrames
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  API Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/feature_extraction/index.html">
+   Feature Extraction
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/feature_extraction/shingles.html">
+     Shingles
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/feature_extraction/minhash.html">
+     Minhashing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/similarity/index.html">
+   Similarity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/similarity/minhash_lsh.html">
+     Minhash LSH
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/similarity/jaccard.html">
+     Jaccard Similarity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api-docs/stream_mining/index.html">
+   Stream Mining
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api-docs/link_analysis/index.html">
+   Link Analysis
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api-docs/network_tools/index.html">
+   Network Tools
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/clustering.html">
+     Clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/metrics.html">
+     Metrics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../api-docs/network_tools/plots.html">
+     Plots
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/link-analysis/pagerank-for-large-data.ipynb.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sparse-transition-matrices">
+   Sparse Transition Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#map-reduce-when-v-fits-in-memory">
+   Map Reduce when
+   <em>
+    v
+   </em>
+   fits in memory
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#striping-approach">
+   Striping Approach
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#blocking-approach">
+   Blocking Approach
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>PageRank for Large Data</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sparse-transition-matrices">
+   Sparse Transition Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#map-reduce-when-v-fits-in-memory">
+   Map Reduce when
+   <em>
+    v
+   </em>
+   fits in memory
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#striping-approach">
+   Striping Approach
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#blocking-approach">
+   Blocking Approach
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="pagerank-for-large-data">
+<h1>PageRank for Large Data<a class="headerlink" href="#pagerank-for-large-data" title="Permalink to this headline">#</a></h1>
+<p>Leskovec et al., in their book <a class="reference external" href="http://www.mmds.org/"><em>Mining of massive datasets</em></a> <span id="id1">[<a class="reference internal" href="../bibliography.html#id6" title="Jure Leskovec, Anand Rajaraman, and Jeffrey David Ullman. Mining of massive data sets. Cambridge university press, 2020.">LRU20</a>]</span> wrote “In practice, for the Web itself, 50–75 iterations are sufficient to converge to within the error limits of double-precision arithmetic.”</p>
+<p>In 2008, <a class="reference external" href="https://googleblog.blogspot.com/2008/07/we-knew-web-was-big.html">Google said that it was indexing 1 trillion pages</a>. and according to <a class="reference external" href="https://venturebeat.com/2013/03/01/how-google-searches-30-trillion-web-pages-100-billion-times-a-month/#:~:text=Google%20says%20that%20it%20stores,now%20at%20100%20million%20gigabytes.">this site</a>, the number of pages is now 30 trillion. Let’s calculate the amount of memory needed to store the vector <span class="math notranslate nohighlight">\(\textbf{v}\)</span> for the 2008 reported value of Google of 1 trillion pages.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1</span><span class="o">*</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">12</span><span class="p">)</span>      <span class="c1"># 1 trillion pages</span>
+<span class="n">bytes_per_float</span> <span class="o">=</span> <span class="mi">8</span>      
+<span class="n">bytes_per_gig</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span>
+<span class="n">n</span> <span class="o">*</span> <span class="n">bytes_per_float</span> <span class="o">/</span> <span class="n">bytes_per_gig</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8000.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is 8 terrabyte for a 2008 data! Even if this value is dated, the vector <span class="math notranslate nohighlight">\(\textbf{v}\)</span> is so large that it can’t fit in memory; we can just imagine how large <span class="math notranslate nohighlight">\(M\)</span> woul be. For this problem, performing MapReduce would definitely be beneficial. In fact, Google’s original purpose for MapReduce is to calculate the matrix-vector multiplications needed in PageRank.</p>
+<p>We present below two issues:</p>
+<ol class="simple">
+<li><p>The matrix <span class="math notranslate nohighlight">\(M\)</span>, is, in fact, very sparse. We can save a lot of space by storing only the nonzero elements.</p></li>
+<li><p>For some reason, we may opt to not use MapReduce, or, we wish to reduce the amount of data passed from Map tasks to Reduce tasks.</p></li>
+</ol>
+<p>Let’s discuss the solutions to these two issues.</p>
+<section id="sparse-transition-matrices">
+<h2>Sparse Transition Matrices<a class="headerlink" href="#sparse-transition-matrices" title="Permalink to this headline">#</a></h2>
+<p>Let us consider Graph 1 again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">G1</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+<span class="n">G1</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;C&quot;</span><span class="p">,</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="s2">&quot;E&quot;</span><span class="p">])</span>
+<span class="n">G1</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;C&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;D&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;E&quot;</span><span class="p">),</span> 
+    <span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;A&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;D&quot;</span><span class="p">),</span> 
+    <span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span><span class="s2">&quot;A&quot;</span><span class="p">),</span>    
+    <span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="s2">&quot;C&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;E&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">),</span>
+<span class="p">])</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>  
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Graph 1. A Graph as a hypothetical representation of the web&quot;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G1</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/pagerank-for-large-data_7_0.png" src="../_images/pagerank-for-large-data_7_0.png" />
+</div>
+</div>
+<p>We can save on space by only representing the nonzero entries in the Transition Matrix.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p>Source</p></th>
+<th class="text-align:left head"><p>(Destination, Value)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>A</p></td>
+<td class="text-align:left"><p>(B, 1/4), (C, 1/4), (D, 1/4), (E, 1/4)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>B</p></td>
+<td class="text-align:left"><p>(A, 1/2), (D, 1/2)</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>C</p></td>
+<td class="text-align:left"><p>(A, 1)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>D</p></td>
+<td class="text-align:left"><p>(B, 1/2), (C, 1/2)</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>E</p></td>
+<td class="text-align:left"><p>(B, 1)</p></td>
+</tr>
+</tbody>
+</table>
+<p>However, we can actually go even further, by only representing the number of out-degrees from a node, and noting the other nodes to which it links. This works since we know that the probability of transitioning from one node to a node it connects to is the same (which is <span class="math notranslate nohighlight">\(1/\text{out-degree}\)</span>). Working this way, allows us to use integers instead of floats for our representation of the Transition Matrix.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p>Source</p></th>
+<th class="text-align:center head"><p>Degree</p></th>
+<th class="text-align:left head"><p>Destination</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>A</p></td>
+<td class="text-align:center"><p>4</p></td>
+<td class="text-align:left"><p>B, C, D, E</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>B</p></td>
+<td class="text-align:center"><p>2</p></td>
+<td class="text-align:left"><p>A, D</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>C</p></td>
+<td class="text-align:center"><p>1</p></td>
+<td class="text-align:left"><p>A</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>D</p></td>
+<td class="text-align:center"><p>2</p></td>
+<td class="text-align:left"><p>B, C</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>E</p></td>
+<td class="text-align:center"><p>2</p></td>
+<td class="text-align:left"><p>B</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="map-reduce-when-v-fits-in-memory">
+<h2>Map Reduce when  <em>v</em> fits in memory<a class="headerlink" href="#map-reduce-when-v-fits-in-memory" title="Permalink to this headline">#</a></h2>
+<p>First, let’s consider the naive case when <span class="math notranslate nohighlight">\(\textbf{v}\)</span> fits in the memory.</p>
+<p>Recall the update rule <span class="math notranslate nohighlight">\(\textbf{v}^{(t+1)}= \beta M\textbf{v}^{(t)} + (1-\beta)\textbf{e}/n\)</span>.</p>
+<p>For simpler notation, let us render this as
+<span class="math notranslate nohighlight">\(
+\textbf{v'}= \beta M\textbf{v} + (1-\beta)\textbf{e}/n
+\)</span></p>
+<p>Recall that <span class="math notranslate nohighlight">\(\beta\)</span> is a constant and <span class="math notranslate nohighlight">\(\textbf{e}\)</span> is just a vector of 1’s. Thus, the update rule above is equivalent to</p>
+<ul class="simple">
+<li><p>Performing a matrix-vector multiplication (<span class="math notranslate nohighlight">\(M\textbf{v}\)</span>)</p></li>
+<li><p>Multiplying the result by a constant (<span class="math notranslate nohighlight">\(\beta\)</span>)</p></li>
+<li><p>Adding to the result another constant (<span class="math notranslate nohighlight">\((1-\beta)/n\)</span>)</p></li>
+</ul>
+<p>Thus, the focus of the MapReduce functions will be on the matrix-vector multiplication, and it can be described as follows:</p>
+<p><strong>Map function</strong>: Produce key-value pair <span class="math notranslate nohighlight">\((i, m_{ij}v_j)\)</span> <br>
+<strong>Reduce function</strong>: Sum all values associated with a given key <span class="math notranslate nohighlight">\(i\)</span>, resulting in the pair <span class="math notranslate nohighlight">\((i, x_i)\)</span></p>
+<p><strong>Pyspark Illustration</strong></p>
+<p>Please refer to the subsection <a class="reference internal" href="pagerank-mapreduce.html"><span class="doc std std-doc">PageRank_Using_MapReduce</span></a> for a discussion on the implementation of this procedure in pyspark.</p>
+</section>
+<section id="striping-approach">
+<h2>Striping Approach<a class="headerlink" href="#striping-approach" title="Permalink to this headline">#</a></h2>
+<p>As seen in the previous discussion, for Google’s PageRank, <span class="math notranslate nohighlight">\(\textbf{v}\)</span> does not actually fit in memory. A solution to address this is <strong>striping</strong>.
+Here we divide the matrix <span class="math notranslate nohighlight">\(M\)</span> into vertical stripes of equal length and similarly divide <span class="math notranslate nohighlight">\(\textbf{v}\)</span> into horizontal stripes of equivalent height as shown in <a class="reference internal" href="#striping"><span class="std std-numref">Fig. 10</span></a> below. The goal is to choose a stripe length small enough so that <span class="math notranslate nohighlight">\(\textbf{v}\)</span> could fit conveniently into the memory of one compute node.</p>
+<figure class="align-default" id="striping">
+<a class="reference internal image-reference" href="../_images/Striping.PNG"><img alt="../_images/Striping.PNG" src="../_images/Striping.PNG" style="width: 350px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">Figure 1. Division of matrix and vector into 5 stripes</span><a class="headerlink" href="#striping" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The MapReduce changes in the following way: Each Map task is assigned a chunk from one of the
+stripes of the matrix and gets the entire corresponding stripe of the vector. The Map and Reduce functions act exactly as previously described.</p>
+</section>
+<section id="blocking-approach">
+<h2>Blocking Approach<a class="headerlink" href="#blocking-approach" title="Permalink to this headline">#</a></h2>
+<p>The striping method described above has the following issues:</p>
+<ol class="simple">
+<li><p>A vertical stripe of <span class="math notranslate nohighlight">\(M\)</span> multiplied by a horizontal stripe of <span class="math notranslate nohighlight">\(\textbf{v}\)</span> actually produces a vector of the same size as <span class="math notranslate nohighlight">\(\textbf{v}\)</span>. A problem happens this vector does not actually fit in memory.</p></li>
+<li><p>If we want to aggregate sums at the Map tasks before sending to the Reducer, the striping method will not be efficient since the product of the matrix and vector stripes affect all rows of the resulting vector <span class="math notranslate nohighlight">\(\textbf{v'}\)</span></p></li>
+</ol>
+<p>To circumvent this limitation is partition <span class="math notranslate nohighlight">\(M\)</span> into <span class="math notranslate nohighlight">\(k x k\)</span> blocks while the vector <span class="math notranslate nohighlight">\(\textbf{v}\)</span> is partitioned into <span class="math notranslate nohighlight">\(k\)</span> stripes as shownin <a class="reference internal" href="#blocking"><span class="std std-numref">Fig. 11</span></a> below.</p>
+<figure class="align-default" id="blocking">
+<a class="reference internal image-reference" href="../_images/Blocking.PNG"><img alt="../_images/Blocking.PNG" src="../_images/Blocking.PNG" style="width: 450px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Blocking approach. Taken from <span id="id2">[<a class="reference internal" href="../bibliography.html#id6" title="Jure Leskovec, Anand Rajaraman, and Jeffrey David Ullman. Mining of massive data sets. Cambridge university press, 2020.">LRU20</a>]</span>.</span><a class="headerlink" href="#blocking" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The MapReduce can be implemented thus:</p>
+<ul class="simple">
+<li><p>There are <span class="math notranslate nohighlight">\(k^2\)</span> Map tasks</p></li>
+<li><p>Each Map task gets one square, say <span class="math notranslate nohighlight">\(M_{ij}\)</span>, and one stripe of the vector, say <span class="math notranslate nohighlight">\(\textbf{v}_j\)</span></p></li>
+<li><p>For each Map task, add the terms with common keys before sending to the Reducer</p></li>
+</ul>
+<p><strong>Advantage of this approach</strong></p>
+<ul class="simple">
+<li><p>As we process <span class="math notranslate nohighlight">\(M_{ij}\)</span>, we can keep both <span class="math notranslate nohighlight">\(\textbf{v'}_i\)</span> and <span class="math notranslate nohighlight">\(\textbf{v}_j\)</span> in memory</p>
+<ul>
+<li><p>Note that all terms generated from <span class="math notranslate nohighlight">\(M_{ij}\)</span> and <span class="math notranslate nohighlight">\(\textbf{v'}_j\)</span> contribute only to <span class="math notranslate nohighlight">\(\textbf{v'}_i\)</span> and no other stripe of <span class="math notranslate nohighlight">\(\textbf{v}\)</span></p></li>
+</ul>
+</li>
+</ul>
+<p><strong>EXERCISES</strong></p>
+<ol class="simple">
+<li><p>Assuming that Google is indexing 30 trillion pages in 2021, how large of a memory is needed to load all the nodes’ PageRanks in one vector?</p></li>
+<li><p>Create a sparse representation of Graph 2 in the previous section.</p></li>
+<li><p>Create a sparse representation of Graph 3 in the previous section.</p></li>
+</ol>
+</section>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="pagerank.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">PageRank</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="pagerank-mapreduce.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">PageRank using MapReduce</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By AIM PhD in DS 2024<br/>
+  
+      &copy; Copyright 2022, AIM PhD in DS 2024.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
