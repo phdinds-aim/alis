@@ -17,6 +17,10 @@ jobs:
         sudo apt-get update;
     - name: Setup python
       uses: actions/setup-python@v2
+    - name: Install alis package
+      run: |
+        pip install -r requirements.txt
+        pip install -e .
     - name: Checkout
       uses: actions/checkout@v3
       with:
@@ -25,7 +29,6 @@ jobs:
       uses: sphinx-notes/pages@v2
       with:
         documentation_path: ./docs
-        requirements_path: ./requirements.txt
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
