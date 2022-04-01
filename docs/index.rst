@@ -7,13 +7,13 @@ ALIS: Algorithmic Library for Scalability
 =========================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    introduction
    installation
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents
    
    finding-similar-items/index
@@ -24,11 +24,12 @@ ALIS: Algorithmic Library for Scalability
 
 .. toctree::
    :caption: API Reference
-   :maxdepth: 3
+   :maxdepth: 1
 
    api-docs/feature_extraction/index
    api-docs/similarity/index
    api-docs/link_analysis/index
+   api-docs/network_tools/index
 
 
 Indices and tables

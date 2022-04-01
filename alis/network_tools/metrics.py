@@ -7,7 +7,7 @@ def average_degree(G):
     """Calculates the average degree of a graph 
 
     Parameters
-    -------
+    ----------
     G : networkx graph
 
     Returns
@@ -31,7 +31,7 @@ def betweenness_centrality(G):
     """Calculates the betweenness centrality of each node in a graph 
 
     Parameters
-    -------
+    ----------
     G : networkx graph
 
     Returns
@@ -49,7 +49,7 @@ def closeness_centrality(G):
     """Calculates the closeness centrality of each node in a graph 
 
     Parameters
-    -------
+    ----------
     G : networkx graph
 
     Returns
@@ -67,7 +67,7 @@ def degree_centrality(G):
     """Calculates the degree centrality of each node in a graph 
 
     Parameters
-    -------
+    ----------
     G : networkx graph
 
     Returns
@@ -84,7 +84,7 @@ def eigenvector_centrality(G):
     """Calculates the eigenvector centrality of each node in a graph 
 
     Parameters
-    -------
+    ----------
     G : networkx graph
 
     Returns

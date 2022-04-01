@@ -17,6 +17,10 @@ def orderVertex(g):
 
 
 def LA(G):
+    """Link Aggregate algorithm implementation
+
+    Taken from: https://github.com/justin830827/Overlapping-Community-Detection/blob/master/LA.py
+    """
     clusters = []
     vertex = orderVertex(G)
     # Iterate through each vertex
@@ -42,6 +46,10 @@ def LA(G):
 
 
 def IS2(cluster, G):
+    """Iterative Scan (IS2) algorithm implementation
+
+    Taken from https://github.com/justin830827/Overlapping-Community-Detection/blob/master/IS2.py
+    """
     # Build a subgraph using input cluster
     cur = G.subgraph(cluster)
     # Calculate the current communication density
@@ -77,5 +85,6 @@ def IS2(cluster, G):
             increase = False
         else:
             W = new_W
+
     # Return new cluster
     return list(cur.nodes)

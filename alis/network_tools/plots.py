@@ -13,7 +13,7 @@ def draw_communities(G, membership, pos):
     """Draws the nodes to a plot with assigned colors for each individual cluster
 
     Parameters
-    -------
+    ----------
     G : networkx graph
     membership : list
         A list where the position is the student and the value at the position is the student club membership.
@@ -77,7 +77,7 @@ def plot_degree_distribution(G):
     """Plots the degree distribution of a graph 
 
     Parameters
-    -------
+    ----------
     G : networkx graph
 
     Returns
