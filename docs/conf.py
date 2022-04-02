@@ -85,6 +85,7 @@ html_theme = 'sphinx_book_theme'
 html_theme_options = {
     'navigation_depth': 4
 }
+html_js_files = ["https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"]
 
 # Mathjax setting
 myst_update_mathjax = False
@@ -97,6 +98,7 @@ mathjax3_config = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 html_css_files = ['custom-style.css']
+html_extra_path = ['extra_files']
 
 # Numbered reference of figures
 numfig = True
