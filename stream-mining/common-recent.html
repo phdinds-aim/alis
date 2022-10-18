@@ -798,8 +798,8 @@ title="Print to PDF"
 <section id="decaying-windows">
 <h2>Decaying Windows<a class="headerlink" href="#decaying-windows" title="Permalink to this headline">#</a></h2>
 <p>In decaying windows, we exponentially decay the count for each movie by a constant <span class="math notranslate nohighlight">\(c\)</span>. <span class="math notranslate nohighlight">\(c\)</span> will have a really small value, like <span class="math notranslate nohighlight">\(10^{-6}\)</span> or <span class="math notranslate nohighlight">\(10^{-9}\)</span>. The value for each element is decayed by multiplying the current count by <span class="math notranslate nohighlight">\((1-c)\)</span> at every time step. Given a stream <span class="math notranslate nohighlight">\(a_1, a_2,...,a_t\)</span>, the exponentially decaying window of this stream is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5f6c58f3-b5c7-4c07-b2d0-c4b52330528d">
-<span class="eqno">(1)<a class="headerlink" href="#equation-5f6c58f3-b5c7-4c07-b2d0-c4b52330528d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5f8178d0-28a8-4e76-9130-9623f3ea03b6">
+<span class="eqno">(1)<a class="headerlink" href="#equation-5f8178d0-28a8-4e76-9130-9623f3ea03b6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{i=0}^{t-1}a_{t-i}(1-c)^i
 \end{equation}\]</div>
 <p>When a new element <span class="math notranslate nohighlight">\(a_{t+1}\)</span> is added into the stream all we need to do is:</p>
