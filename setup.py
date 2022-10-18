@@ -14,7 +14,7 @@ MIN_REQS = [
     'ipywidgets>=7.7.0',
     'graphframes>=0.6',
     'kafka-python>=2.0.2',
-    'pyspark==3.1.2',
+    'pyspark==3.1.3',
     'seaborn>=0.11.2',
     'plotly>=5.6.0'
 ]
